@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import login, logout
-from CTF.views import current_datetime, register, profile, ChallengeDetail, ContestDetailView
+from CTF.views import current_datetime, register, profile, ChallengeView, ContestDetailView
 
 
 # Uncomment the next two lines to enable the admin:
@@ -18,7 +18,7 @@ urlpatterns = patterns('',
 
                        # CTF URL Patterns
                        url(r'^contests/(?P<slug>[-_\w]+)/', ContestDetailView.as_view(), name='contest-view'),
-                       url(r'^challenge/(?P<slug>[-_\w]+)/', ChallengeDetail.as_view(), name='challenge-view'),
+                       url(r'^challenge/(?P<slug>[-_\w]+)/', ChallengeView, name='challenge-view'),
 
                        # Login patterns
                        url(r'^accounts/login/$', login, name='login'),
