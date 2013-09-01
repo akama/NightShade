@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Back To School CTF</title>
+    <meta charset="utf-8">
+    <!-- CSS -->
+    <link href="{% static "css/custom.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "css/min/960.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "css/min/text.css" %}" rel="stylesheet" media="screen">
+</head>
+
+<body>
+<div class="container_12">
+    <div class="topbar grid_12">
+
+        {% if user.is_authenticated %}
+            <a href="{% url "profile" %}">user: {{ user.username }}</a>
+            <a href="{% url "logout" %}">Logout</a>
+        {% else %}
+            <a href="{% url "login" %}">Login</a>
+        {% endif %}
+    </div>
+    {% block content %}
+        <h1>Hello, world!</h1>
+
+
+    {% endblock %}
+</div>
+</body>
+</html>

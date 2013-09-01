@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1> {{ object.title }} </h1>
+
+    {% for challenge in object.challenge_set.all %}
+
+        <a href="{% url 'challenge-view' challenge.slug %}">{{ challenge.title }}</a>
+
+    {% endfor %}
+
+{% endblock %}

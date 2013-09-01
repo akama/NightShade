@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="grid_12">
+        <h3 class="score">{{ object.points }} - {{ object.title }}</h3>
+
+        <p class="score">Category: {{ object.category }}</p>
+
+        <p>{{ object.description }}</p>
+
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit flag.">
+        </form>
+
+
+    </div>
+
+{% endblock %}
