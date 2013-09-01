@@ -61,6 +61,13 @@ class Challenge(models.Model):
 
         super(Challenge, self).save(*args, **kwargs)
 
+    def solved(self, user):
+        try:
+            self.score_set.get(user=user).user
+            return True
+        except Score.DoesNotExist:
+            return False
+
 
 class ChallengeAdmin(admin.ModelAdmin):
     exclude = ('slug'),

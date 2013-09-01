@@ -9,11 +9,15 @@
         <p>{{ object.description }}</p>
 
 
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit flag.">
-        </form>
+        {% if not solved %}
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit flag.">
+            </form>
+        {% else %}
+            <p>You have already solved this challenge.</p>
+        {% endif %}
 
 
     </div>

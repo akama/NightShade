@@ -27,5 +27,4 @@ class ChallengeScoreForm(forms.Form):
 
     def clean_submission(self):
         if self.cleaned_data['submission'] != self.key:
-            print("Flag is not correct")
             raise forms.ValidationError("Flag is not correct.")

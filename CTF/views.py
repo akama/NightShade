@@ -46,11 +46,13 @@ def ChallengeView(request, slug):
         kwargs = {'key': challenge.key}
         form = ChallengeScoreForm(request.POST, **kwargs)
         if form.is_valid():
-            print('testing')
             return HttpResponseRedirect(reverse('home'))
     else:
         form = ChallengeScoreForm()
-    return render(request, 'CTF/challenge_detail.html', {'object': challenge, 'form': form})
+
+    solved = challenge.solved(request.user)
+
+    return render(request, 'CTF/challenge_detail.html', {'object': challenge, 'form': form, 'solved': solved})
 
 
 class ContestDetailView(DetailView):
