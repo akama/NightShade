@@ -21,6 +21,10 @@ def current_datetime(request):
         return render(request, 'time.html', context_instance=RequestContext(request))
 
 
+def home_page(request):
+    return render(request, 'home.html', {'contests': Contest.objects.all()}, context_instance=RequestContext(request), )
+
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -39,6 +43,7 @@ def profile(request):
     return HttpResponseRedirect(reverse('home'))
 
 
+@login_required
 def ChallengeView(request, slug):
     challenge = Challenge.objects.get(slug=slug)
 

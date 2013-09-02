@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import login, logout
-from CTF.views import current_datetime, register, profile, ChallengeView, ContestDetailView
+from CTF.views import register, profile, ChallengeView, ContestDetailView, home_page
 
 
 # Uncomment the next two lines to enable the admin:
@@ -13,8 +13,8 @@ urlpatterns = patterns('',
                        # url(r'^$', 'NightShade.views.home', name='home'),
                        # url(r'^NightShade/', include('NightShade.foo.urls')),
 
-                       url(r'^$', current_datetime, name='home_page'),
-                       url(r'^time/$', current_datetime, name='home'),
+                       url(r'^$', home_page, name='home_page'),
+                       url(r'^time/$', home_page, name='home'),
 
                        # CTF URL Patterns
                        url(r'^contests/(?P<slug>[-_\w]+)/', ContestDetailView.as_view(), name='contest-view'),

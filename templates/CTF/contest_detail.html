@@ -4,6 +4,8 @@
 
     <h1> {{ object.title }} </h1>
 
+    <p>{{ object.description }}</p>
+
     {% for challenge in object.challenge_set.all %}
 
         {% if challenge.active %}
