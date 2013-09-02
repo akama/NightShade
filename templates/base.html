@@ -25,6 +25,18 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Game Menu <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Challenges</a></li>
+                            <li><a href="#">Leaderboard</a></li>
+                            <li><a href="#">Settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            {% endif %}
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                     <li id="username"><a href="{% url "profile" %}">{{ user.username }}</a></li>
@@ -34,7 +46,6 @@
                     <li id="register"><a href="{% url "register" %}">Register</a></li>
                 {% endif %}
             </ul>
-
         </div>
         <!-- /.navbar-collapse -->
     </nav>

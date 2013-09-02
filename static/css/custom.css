@@ -46,6 +46,7 @@ body {
 }
 
 .navbar.navbar-inverse {
+	box-shadow: 0px 2px 4px 0px;
 }
 
 .navbar-default a.navbar-brand {
