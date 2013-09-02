@@ -6,6 +6,14 @@ body {
     background-color: lightblue;
 }
 
+.btn.btn-default.register {
+	float: left;
+}
+
+.btn.btn-default.register a{
+	text-decoration: none;
+}
+
 .headerbar {
     margin-left: 20px;
     margin-top: 20px;
