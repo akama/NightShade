@@ -1,18 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="grid_12">
-        <h2>Contests</h2>
+    <h2>Contests</h2>
     </div>
     {% for contest in object_list %}
         <div class="grid_12">
-            <h3>{{ contest.title }}</h3>
-            {% for challenge in contest.challenge_set.all %}
-                <ul>
-                    <p1>{{ challenge.title }}</p1>
-                    <br></ul>
-            {% endfor %}
-        </div>
+        <h3>{{ contest.title }}</h3>
+        {% for challenge in contest.challenge_set.all %}
+            <ul>
+                <p1>{{ challenge.title }}</p1>
+                <br></ul>
+        {% endfor %}
     {% endfor %}
 
 

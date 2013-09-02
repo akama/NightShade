@@ -29,7 +29,7 @@ def register(request):
             return HttpResponseRedirect(reverse('home'))
     else:
         form = UserCreationForm()
-    return render(request, "registration/register.html", {
+    return render(request, "registration/login.html", {
         'form': form,
     })
 

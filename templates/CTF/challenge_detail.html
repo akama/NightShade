@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="grid_12">
-        <h3 class="score">{{ object.points }} - {{ object.title }}</h3>
 
-        <p class="score">Category: {{ object.category }}</p>
+    <h3 class="score">{{ object.points }} - {{ object.title }}</h3>
 
-        <p>{{ object.description }}</p>
+    <p class="score">Category: {{ object.category }}</p>
 
-
-        {% if not solved %}
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Submit flag.">
-            </form>
-        {% else %}
-            <p>You have already solved this challenge.</p>
-        {% endif %}
+    <p>{{ object.description }}</p>
 
 
-    </div>
+    {% if not solved %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit flag.">
+        </form>
+    {% else %}
+        <p>You have already solved this challenge.</p>
+    {% endif %}
+
+
+
 
 {% endblock %}

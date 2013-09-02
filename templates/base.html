@@ -12,44 +12,35 @@
 </head>
 
 <body>
-    <div class="container">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{% url "login" %}">
-                    {% block navbar-title %}ISUSec CTF{% endblock %}
-                </a>
-            </div>
+<div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url "home" %}">
+                {% block navbar-title %}ISUSec CTF{% endblock %}
+            </a>
+        </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url "profile" %}">{{ user.username }}</a></li>
-                        <li><a href="{% url "logout" %}">Logout</a></li>
-                    {% else %}
-                        <li id="login"><a href="#">Login</a></li>
-                        <li id="register"><a href="#">Register</a></li>
-                    {% endif %}
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li><a href="{% url "profile" %}">{{ user.username }}</a></li>
+                    <li><a href="{% url "logout" %}">Logout</a></li>
+                {% else %}
+                    <li id="login"><a href="#">Login</a></li>
+                    <li id="register"><a href="#">Register</a></li>
+                {% endif %}
+            </ul>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Help</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
 
-        <div class="row">
-            {% block content %}
+    <div class="row">
+        {% block content %}
 
-            {% endblock %}
+        {% endblock %}
         </row>
     </div>
 </body>
@@ -57,11 +48,11 @@
 <script src="{% static "js/bootstrap.min.js" %}"></script>
 
 <script>
-    $(document).ready(function(){
-        $('#login').on('click', function() {
+    $(document).ready(function () {
+        $('#login').on('click', function () {
             $('#loginModal').modal('show');
         });
-        $('#register').on('click', function() {
+        $('#register').on('click', function () {
             $('#registerModal').modal('show');
         });
     });
