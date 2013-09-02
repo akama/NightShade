@@ -1,8 +1,10 @@
 {% extends "empty.html" %}
 
 {% block content %}
-    <h4>
+    <div class="logout-text">
+    	<span style="font-size:2em" class="glyphicon glyphicon-warning-sign"></span>
+    	<br><br>
         You are now logged out.
         <a href="{% url "home_page" %}">Main page.</a>
-    </h4>
+    </div>
 {% endblock %}

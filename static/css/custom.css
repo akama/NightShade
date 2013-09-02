@@ -1,8 +1,19 @@
-body {
-	padding: 70px;
-	background-image: url('../img/pixel_weave.png')
+html {
+	overflow: visible;
 }
 
+body {
+	background-color: white;
+}
+
+body.modal-open {
+	margin: 0;
+}
+
+div.logout-text {
+    padding-top: 100px;
+    font-size: 18px;
+    text-align: center;
 }
 
 .topbar {
@@ -12,8 +23,7 @@ body {
 .colorbar-left {
 	position: absolute;
 	left: 0;
-	margin-top: -70px;
-	background-color: rgba(0, 0, 0, 0.25);
+	background-image: url('../img/pixel_weave.png');
 	width: 15%;
 	height: 100%;
 }
@@ -21,36 +31,100 @@ body {
 .colorbar-right {
 	position: absolute;
 	right: 0;
-	margin-top: -70px;
-	background-color: rgba(0, 0, 0, 0.25);
+	background-image: url('../img/pixel_weave.png');
 	width: 15%;
 	height: 100%;
 }
 
+.vertical-bar.nav {
+	padding-top: 90px;
+	color: grey;
+	padding-left: 0.3em;
+	font-size: 20px;
+	position: absolute;
+	left: 15%;
+	height: 100%;
+	width: 35px;
+	background-color: #222;
+}
+
+a#vbar-nav-icon .glyphicon{
+	margin-top: 5px;
+}
+
+.vertical-bar.right{
+	position: absolute;
+	right: 15%;
+	height: 100%;
+	width: 2px;
+	background-color: #222;
+}
+
+.modal {
+    bottom: 0;
+    display: none;
+    left: 0;
+    overflow: visible;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1500;
+}
+
 .modal-header {
+	color: white;
 	border-radius: 6px 6px 0 0;
-	background-color: rgba(0, 0, 0, 0.25);
+	background-color: #222;
 }
 
 .modal-footer {
+	color: white;
 	border-radius: 0 0 6px 6px;
-	background-color: rgba(0, 0, 0, 0.25);
+	background-color: #222;
 }
 
 .modal-content {
 	background-image: url('../img/pixel_weave.png')
 }
 
-.navbar {
-	color: black;
-}
-
 .navbar.navbar-inverse {
-	box-shadow: 0px 2px 4px 0px;
+	margin-left: 15%;
+	top: 0;
+	border-radius: 0px;
+	width: 70%;
+	border: 0;
 }
 
-.navbar-default a.navbar-brand {
-	color: #3A3A3A;
+.navbar div.navbar-header {
+	position: absolute;
+	height: 70px;
+	background-color: #222;
+	border-radius: 0 0 10px 0;
+	border-right: 2px solid white;
+	border-bottom: 2px solid white;
+}
+
+.navbar div.navbar-header:hover {
+	position: absolute;
+	height: 70px;
+	background-color: #474747;
+	border-radius: 0 0 10px 0;
+	border-right: 2px solid white;
+	border-bottom: 2px solid white;
+}
+
+@font-face {
+	font-family: pennStation;
+	src: url("../fonts/Pennstat.ttf");
+}
+
+.navbar.navbar-inverse a.navbar-brand {
+	font-family: pennStation;
+	font-size: 55px;
+	color: white;
+	height: 100%;
+	padding: 28px 15px;
+	line-height: 20px;
 }
 
 li#username {

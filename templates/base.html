@@ -14,32 +14,40 @@
 <body>
 <div class="colorbar-left"></div>
 <div class="colorbar-right"></div>
-<div class="container">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="vertical-bar nav">
+    {% if user.is_authenticated %}
+    <a id="vbar-nav-icon" 
+       href="{% url "profile" %}"
+       data-toggle="tooltip"
+       title="Profile">
+        <span class="glyphicon glyphicon-user"></span>
+    </a>
+    {% endif %}
+    <a id="vbar-nav-icon" 
+       href="#"
+       data-toggle="tooltip"
+       title="Challenges">
+        <span class="glyphicon glyphicon-list"></span>
+    </a>
+</div>
+<div class="vertical-bar right"></div>
+    <nav class="navbar navbar-inverse" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <a class="navbar-brand" href="{% url "home_page" %}">
-                {% block navbar-title %}ISUSec CTF{% endblock %}
+                {% block navbar-title %}ISUSec CTF {% endblock %}
             </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-            {% if user.is_authenticated %}
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Game Menu <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Challenges</a></li>
-                            <li><a href="#">Leaderboard</a></li>
-                            <li><a href="#">Settings</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            {% endif %}
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                    <li id="username"><a href="{% url "profile" %}">{{ user.username }}</a></li>
+                    <li id="username"><a href="{% url "profile" %}">
+                        <span class="glyphicon glyphicon-user"></span>
+                         - 
+                        {{ user.username }}
+                    </a></li>
                     <li><a href="{% url "logout" %}">Logout</a></li>
                 {% else %}
                     <li id="login"><a href="{% url "login" %}">Login</a></li>
@@ -60,6 +68,7 @@
 <script>
     $(document).ready(function () {
         {% block modalTriggers %}{% endblock %}
+        $("[data-toggle='tooltip']").tooltip({placement: 'right'});
     });
 </script>
 </html>
