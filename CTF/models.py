@@ -99,6 +99,8 @@ class Challenge(models.Model):
             return True
         except Score.DoesNotExist:
             return False
+        except TypeError:
+            return False
 
 
 class ChallengeAdmin(admin.ModelAdmin):

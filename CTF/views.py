@@ -43,14 +43,16 @@ def profile(request):
     return HttpResponseRedirect(reverse('home'))
 
 
-@login_required
 def ChallengeView(request, slug):
     challenge = Challenge.objects.get(slug=slug)
+
+    if request.method == 'POST' and not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
 
     if request.method == 'POST':
         kwargs = {'key': challenge.key}
         form = ChallengeScoreForm(request.POST, **kwargs)
-        if form.is_valid():
+        if form.is_valid() and not challenge.solved(request.user):
             score = Score(challenge=challenge, user=request.user, contest=challenge.contest)
             score.save()
             return HttpResponseRedirect(reverse('challenge-view', args=(slug,)))
