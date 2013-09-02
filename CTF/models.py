@@ -1,5 +1,6 @@
 from hashlib import md5
 from random import random
+from operator import itemgetter
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -7,8 +8,28 @@ from django.contrib import admin
 from django.template.defaultfilters import slugify
 
 
-
 # Create your models here.
+
+class Score(models.Model):
+    user = models.ForeignKey(User)
+    challenge = models.ForeignKey('Challenge')
+    completed = models.DateTimeField(auto_now_add=True)
+    contest = models.ForeignKey('Contest')
+
+    def __str__(self):
+        return "{0}:{1} for {2} points".format(self.challenge, self.user, self.challenge.points)
+
+    def get_points(self):
+        return self.challenge.points
+
+
+class ScoreAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Score, ScoreAdmin)
+
+
 class Contest(models.Model):
     title = models.CharField(max_length=200, unique=True)
     description = models.TextField()
@@ -19,14 +40,25 @@ class Contest(models.Model):
         return self.title
 
     def score_board(self):
-        results = dict()
-        for chal in self.challenge_set.all():
-            for sc in chal.score_set.all():
-                if sc.user.__str__() in results:
-                    results[sc.user.__str__()] = results[sc.user.__str__()] + sc.get_points()
-                else:
-                    results[sc.user.__str__()] = + sc.get_points()
-        return results
+        results = self.score_set.all()
+        sorted_results = []
+        found_match = False
+        for score in results:
+            for foo in sorted_results:
+                if score.user.username == foo[0]:
+                    foo[1] = foo[1] + score.get_points()
+                    if score.completed > foo[2]:
+                        foo[2] = score.completed
+                    found_match = True
+            if not found_match:
+                sorted_results.append([score.user.username, score.get_points(), score.completed])
+            found_match = False
+
+        # sorting bitches
+        sorted_results.sort(key=itemgetter(2))
+        sorted_results.sort(key=itemgetter(1), reverse=True)
+
+        return sorted_results
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -75,21 +107,4 @@ class ChallengeAdmin(admin.ModelAdmin):
 
 admin.site.register(Challenge, ChallengeAdmin)
 
-
-class Score(models.Model):
-    user = models.ForeignKey(User)
-    challenge = models.ForeignKey(Challenge)
-
-    def __str__(self):
-        return "{0}:{1} for {2} points".format(self.challenge, self.user, self.challenge.points)
-
-    def get_points(self):
-        return self.challenge.points
-
-
-class ScoreAdmin(admin.ModelAdmin):
-    pass
-
-
-admin.site.register(Score, ScoreAdmin)
 

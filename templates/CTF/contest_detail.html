@@ -6,8 +6,15 @@
 
     {% for challenge in object.challenge_set.all %}
 
-        <a href="{% url 'challenge-view' challenge.slug %}">{{ challenge.title }}</a>
+        {% if challenge.active %}
+            <a href="{% url 'challenge-view' challenge.slug %}">{{ challenge.title }}</a><br>
+        {% endif %}
+    {% endfor %}
 
+    <br>
+
+    {% for person, score, time in object.score_board %}
+        {{ person }}: {{ score }}<br>
     {% endfor %}
 
 {% endblock %}

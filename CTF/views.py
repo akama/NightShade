@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.views.generic.detail import DetailView
 
-from CTF.models import Contest, Challenge
+from CTF.models import Contest, Challenge, Score
 
 from CTF.forms import ChallengeScoreForm
 
@@ -46,7 +46,9 @@ def ChallengeView(request, slug):
         kwargs = {'key': challenge.key}
         form = ChallengeScoreForm(request.POST, **kwargs)
         if form.is_valid():
-            return HttpResponseRedirect(reverse('home'))
+            score = Score(challenge=challenge, user=request.user, contest=challenge.contest)
+            score.save()
+            return HttpResponseRedirect(reverse('challenge-view', args=(slug,)))
     else:
         form = ChallengeScoreForm()
 
