@@ -28,8 +28,8 @@
                     <li><a href="{% url "profile" %}">{{ user.username }}</a></li>
                     <li><a href="{% url "logout" %}">Logout</a></li>
                 {% else %}
-                    <li id="login"><a href="#">Login</a></li>
-                    <li id="register"><a href="#">Register</a></li>
+                    <li id="login"><a href="{% url "login" %}">Login</a></li>
+                    <li id="register"><a href="{% url "register" %}">Register</a></li>
                 {% endif %}
             </ul>
 
@@ -38,10 +38,7 @@
     </nav>
 
     <div class="row">
-        {% block content %}
-
-        {% endblock %}
-        </row>
+        {% block content %}{% endblock %}
     </div>
 </body>
 <script src="{% static "js/jquery-1.10.2.js" %}"></script>
@@ -49,12 +46,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#login').on('click', function () {
-            $('#loginModal').modal('show');
-        });
-        $('#register').on('click', function () {
-            $('#registerModal').modal('show');
-        });
+        {% block modalTriggers %}{% endblock %}
     });
 </script>
 </html>

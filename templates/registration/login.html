@@ -2,6 +2,10 @@
 
 {% block title %}Login{% endblock %}
 
+    {% if form.errors %}
+        <p class="error">Sorry, that's not a valid username or password</p>
+    {% endif %}
+
 {% block content %}
 
     <div class="modal fade" id="loginModal">
@@ -16,10 +20,6 @@
                     <h4 class="modal-title">Log In</h4>
                 </div>
                 <div class="modal-body">
-
-                    {% if form.errors %}
-                        <p class="error">Sorry, that's not a valid username or password</p>
-                    {% endif %}
 
                     <form id="loginForm" role="form" action="" method="post">
                         {% csrf_token %}
@@ -58,35 +58,8 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <div class="modal fade" id="registerModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" 
-                            class="close" 
-                            data-dismiss="modal" 
-                            aria-hidden="true">&times;
-                    </button>
-                    <h4 class="modal-title">Register</h4>
-                </div>
-                <div class="modal-body">
+{% endblock %}
 
-                    <form id="registerForm" action="" method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit" 
-                                value="Create the account"
-                                class="btn btn-default">
-                        	Register
-                        </button>
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
+{% block modalTriggers %}
+    $('#loginModal').modal('show');
 {% endblock %}
