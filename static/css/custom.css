@@ -6,6 +6,11 @@ body {
 	background-color: white;
 }
 
+.container {
+	padding-top: 10px;
+	padding-left: 50px;
+}
+
 body.modal-open {
 	margin: 0;
 }
