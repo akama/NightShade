@@ -1,3 +1,10 @@
-You are now logged out.
+{% extends "empty.html" %}
 
-<a href="{% url "home" %}">Main page.</a>
+{% block content %}
+	<div class="container">
+		<h4>
+			You are now logged out.
+			<a href="{% url "home" %}">Main page.</a>
+		</h4>
+	</div>
+{% endblock %}

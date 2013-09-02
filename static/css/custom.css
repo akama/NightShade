@@ -1,3 +1,7 @@
+body {
+	padding: 70px;
+}
+
 .topbar {
     background-color: lightblue;
 }

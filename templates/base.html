@@ -3,30 +3,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Back To School CTF</title>
+    <title>{% block title %}Back To School CTF{% endblock %}</title>
     <meta charset="utf-8">
     <!-- CSS -->
     <link href="{% static "css/custom.css" %}" rel="stylesheet" media="screen">
-    <link href="{% static "css/min/960.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
     <link href="{% static "css/min/text.css" %}" rel="stylesheet" media="screen">
 </head>
 
 <body>
-<div class="container_12">
-    <div class="topbar grid_12">
+    <div class="container">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url "login" %}">
+                    {% block navbar-title %}ISUSec CTF{% endblock %}
+                </a>
+            </div>
 
-        {% if user.is_authenticated %}
-            <a href="{% url "profile" %}">user: {{ user.username }}</a>
-            <a href="{% url "logout" %}">Logout</a>
-        {% else %}
-            <a href="{% url "login" %}">Login</a>
-        {% endif %}
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url "profile" %}">{{ user.username }}</a></li>
+                        <li><a href="{% url "logout" %}">Logout</a></li>
+                    {% else %}
+                        <li id="login"><a href="#">Login</a></li>
+                        <li id="register"><a href="#">Register</a></li>
+                    {% endif %}
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+
+        <div class="row">
+            {% block content %}
+
+            {% endblock %}
+        </row>
     </div>
-    {% block content %}
-        <h1>Hello, world!</h1>
-
-
-    {% endblock %}
-</div>
 </body>
+<script src="{% static "js/jquery-1.10.2.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#login').on('click', function() {
+            $('#loginModal').modal('show');
+        });
+        $('#register').on('click', function() {
+            $('#registerModal').modal('show');
+        });
+    });
+</script>
 </html>

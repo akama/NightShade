@@ -3,11 +3,32 @@
 {% block title %}Create an account{% endblock %}
 
 {% block content %}
-    <h1>Create an account</h1>
 
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create the account">
-    </form>
+	<div class="modal fade" id="registerModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" 
+							class="close" 
+							data-dismiss="modal" 
+							aria-hidden="true">&times;
+					</button>
+					<h4 class="modal-title">Register</h4>
+				</div>
+				<div class="modal-body">
+
+				    <form action="" method="post">
+				        {% csrf_token %}
+				        {{ form.as_p }}
+				        <input type="submit" value="Create the account">
+				    </form>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
 {% endblock %}
