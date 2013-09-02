@@ -3,10 +3,8 @@
 {% block content %}
 
     {% for contest in contests %}
-        {% if contest.active %}
-            <a href='{% url 'contest-view' contest.slug %}'><h5>{{ contest.title }}</h5></a>
-            <p>{{ contest.description }}</p>
-        {% endif %}
+        <a href='{% url 'contest-view' contest.slug %}'><h5>{{ contest.title }}</h5></a>
+        <p>{{ contest.description }}</p>
     {% endfor %}
 
 {% endblock %}

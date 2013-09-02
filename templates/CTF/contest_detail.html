@@ -7,7 +7,6 @@
     <p>{{ object.description }}</p>
 
     {% for challenge in object.challenge_set.all %}
-
         {% if challenge.active %}
             <a href="{% url 'challenge-view' challenge.slug %}">{{ challenge.title }}</a><br>
         {% endif %}
