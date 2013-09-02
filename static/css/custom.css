@@ -1,9 +1,67 @@
 body {
 	padding: 70px;
+	background-image: url('../img/pixel_weave.png')
+}
+
 }
 
 .topbar {
     background-color: lightblue;
+}
+
+.colorbar-left {
+	position: absolute;
+	left: 0;
+	margin-top: -70px;
+	background-color: rgba(0, 0, 0, 0.25);
+	width: 15%;
+	height: 100%;
+}
+
+.colorbar-right {
+	position: absolute;
+	right: 0;
+	margin-top: -70px;
+	background-color: rgba(0, 0, 0, 0.25);
+	width: 15%;
+	height: 100%;
+}
+
+.modal-header {
+	border-radius: 6px 6px 0 0;
+	background-color: rgba(0, 0, 0, 0.25);
+}
+
+.modal-footer {
+	border-radius: 0 0 6px 6px;
+	background-color: rgba(0, 0, 0, 0.25);
+}
+
+.modal-content {
+	background-image: url('../img/pixel_weave.png')
+}
+
+.navbar {
+	color: black;
+}
+
+.navbar.navbar-inverse {
+}
+
+.navbar-default a.navbar-brand {
+	color: #3A3A3A;
+}
+
+li#username {
+	background-color: white;
+}
+
+li#username a {
+	color: black;
+}
+
+li#username a:hover {
+	color: grey;
 }
 
 .btn.btn-default.register {

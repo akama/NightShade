@@ -17,14 +17,46 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="" method="post">
+                    <form action="" role="form" method="post">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <input type="submit" value="Create the account">
+                        <div class="form-group">
+                            <label for="username">User Name</label>
+                            <input type="text"
+                                   name="username" 
+                                   maxlength="30"
+                                   id="id_username" 
+                                   class="form-control"
+                                   placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password1">Password</label>
+                            <input type="password"
+                                   name="password1" 
+                                   id="id_password1" 
+                                   class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password2">Re-Enter Password</label>
+                            <input type="password"
+                                   name="password2" 
+                                   id="id_password2" 
+                                   class="form-control">
+                        </div>
+
+                        <button type="submit" 
+                                class="btn btn-default">
+                            Submit
+                        </button>
                     </form>
 
                 </div>
                 <div class="modal-footer">
+                    <p style="text-align:left">Already have an account?</p>
+                    <button type="button" class="btn btn-default register">
+                        <a href="{% url "login" %}">
+                            Log In
+                        </a>
+                    </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
