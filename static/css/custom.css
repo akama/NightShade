@@ -9,6 +9,8 @@ body {
 .container {
 	padding-top: 10px;
 	padding-left: 50px;
+	margin-left: 15%;
+	width: 70%;
 }
 
 body.modal-open {
@@ -102,7 +104,7 @@ a#vbar-nav-icon .glyphicon{
 
 .navbar div.navbar-header {
 	position: absolute;
-	height: 70px;
+	height: 100px;
 	background-color: #222;
 	border-radius: 0 0 10px 0;
 	border-right: 2px solid white;
@@ -111,7 +113,7 @@ a#vbar-nav-icon .glyphicon{
 
 .navbar div.navbar-header:hover {
 	position: absolute;
-	height: 70px;
+	height: 100px;
 	background-color: #474747;
 	border-radius: 0 0 10px 0;
 	border-right: 2px solid white;
