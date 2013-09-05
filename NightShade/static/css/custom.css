@@ -7,8 +7,10 @@
 /*
 ------------------------------------------------------------------------------------*/
 html {
-	overflow-y: scroll;
+	overflow-y: scroll; 
 	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 body {
@@ -18,7 +20,7 @@ body {
 }
 
 .container {
-	height: 100%;
+	min-height: 100%;
 	background-image: url('../img/vbar.png'), url('../img/vbar_inverted.png');
 	background-color: white;
 	background-position: left top, right top;
@@ -68,10 +70,9 @@ body {
 }
 
 .line-spacer {
-	width: 100px;
 	margin: 20px auto;
-	background-color: white;
-	height: 1px;
+	background-color: black;
+	height: 2px;
 }
 
 /*----------------------------------------------------------------------------------*/
@@ -178,38 +179,40 @@ body {
 
 a#menulink {
 	position: relative;
-	top: 20px;
 }
 
-a#menulink:hover {
+div.menutext {
+	color: white;
+	background-color: #222;
+	padding-top: 20px;
+	height: 100%;
+	width: 100px;
+}
 
+div.menutext:hover {
+	background-color: #474747;
 }
 
 div#username {
 	background-color: white;
+	color: black;
 	float: left;
-	height: 100%;
-	width: 100px;
+}
+
+div#username:hover {
+	background-color: rgb(214, 214, 214);
 }
 
 div#login {
 	float: left;
-	height: 100%;
-	width: 100px;
 }
 
 div#register {
 	float: right;
-	height: 100%;
-	width: 100px;
 }
 
-div#username a {
-	color: black;
-}
-
-div#username a:hover {
-	color: grey;
+div#logout {
+	float: right;
 }
 
 div.logout-text {

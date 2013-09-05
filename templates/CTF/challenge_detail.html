@@ -6,18 +6,23 @@
 
     <p class="score">Category: {{ object.category }}</p>
 
-    <p>{{ object.description }}</p>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="well">{{ object.description|linebreaks }}</div>
+        </div>
+    </div>
 
-
-    {% if not solved %}
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit flag.">
-        </form>
-    {% else %}
-        <p>You have already solved this challenge.</p>
-    {% endif %}
+    <div class="row">
+        {% if not solved %}
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit flag.">
+            </form>
+        {% else %}
+            <p>You have already solved this challenge.</p>
+        {% endif %}
+    </div>
 
 
 

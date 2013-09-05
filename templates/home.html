@@ -3,10 +3,16 @@
 {% block content %}
 
     {% for contest in contests %}
-        <a href='{% url 'contest-view' contest.slug %}'>
-           <h3>{{ contest.title }}</h3>
-        </a>
-        <p>{{ contest.description }}</p>
+	    <a href='{% url 'contest-view' contest.slug %}'>
+	       <h2>{{ contest.title }}</h2>
+	    </a>
+	    <div class="row">
+	    	<div class="col-md-9 col-md-offset-1">
+		        <p>{{ contest.description|linebreaks }}</p>
+		    </div>
+		</div>
+
+		<div class="line-spacer"></div>
     {% endfor %}
 
 {% endblock %}

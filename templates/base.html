@@ -25,21 +25,17 @@
     <div class="titlebar-menu">
         <div class="auth">
             {% if user.is_authenticated %}
-                <div id="username"><a id="menulink" href="{% url "profile" %}">
-                    <span class="glyphicon glyphicon-user"></span>
-                     - 
-                    {{ user.username }}
-                </a></div>
-                <div><a id="menulink" href="{% url "logout" %}">Logout</a></div>
+                <a id="menulink" href="{% url "profile" %}"><div class="menutext" id="username">{{ user.username }}</div></a>
+                <a id="menulink" href="{% url "logout" %}"><div class="menutext" id="logout">Logout</div></a>
             {% else %}
-                <div id="login"><a id="menulink" href="{% url "login" %}">Login</a></div>
-                <div id="register"><a id="menulink" href="{% url "register" %}">Register</a></div>
+                <a id="menulink" href="{% url "login" %}"><div class="menutext" id="login">Login</div></a>
+                <a id="menulink" href="{% url "register" %}"><div class="menutext" id="register">Register</div></a>
             {% endif %}
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-11 col-md-offset-1">
                 {% block content %}{% endblock %}
         </div>
     </div>

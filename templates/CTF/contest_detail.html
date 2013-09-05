@@ -4,12 +4,16 @@
 
     <h1> {{ object.title }} </h1>
 
-    <p>{{ object.description }}</p>
+    <div class="row">
+        <div class="col-md-10">
+            <p>{{ object.description|linebreaks }}</p>
+        </div>
+    </div>
 
-    <div class="line-spacer"></div>
-
+    <div class="row">
       <table class="table table-bordered table-striped"
-             style="width: 60%;">
+             style="width: 60%;
+                    margin-top: 40px;">
         <thead>
           <tr>
             <th>Challenge</th>
@@ -34,10 +38,9 @@
         </tbody>
       </table>
 
-      <div class="line-spacer"></div>
-
       <table class="table table-bordered table-striped"
-             style="width: 60%;">
+             style="width: 60%;
+                    margin-top: 40px;">
         <thead>
           <tr>
             <th>Name</th>
@@ -54,5 +57,5 @@
     {% endfor %}
         </tbody>
       </table>
-    
+    </div>
 {% endblock %}
