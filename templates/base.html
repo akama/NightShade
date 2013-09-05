@@ -14,53 +14,34 @@
 <body>
 <div class="colorbar-right"></div>
 <div class="colorbar-left"></div>
-<div class="vertical-bar right"></div>
-<div class="vertical-bar nav">
-    {% if user.is_authenticated %}
-    <a id="vbar-nav-icon" 
-       href="{% url "profile" %}"
-       data-toggle="tooltip"
-       title="Profile">
-        <span class="glyphicon glyphicon-user"></span>
-    </a>
-    {% endif %}
-    <a id="vbar-nav-icon" 
-       href="#"
-       data-toggle="tooltip"
-       title="Challenges">
-        <span class="glyphicon glyphicon-list"></span>
-    </a>
-</div>
-    <nav class="navbar navbar-inverse" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{% url "home_page" %}">
-                {% block navbar-title %}ISUSec CTF {% endblock %}
-            </a>
-        </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
+        <a class="titlebar-logo" href="{% url "home_page" %}">
+            <div class="titlebar-logo-title">
+                {% block navbar-title %}ISUSEC{% endblock %}
+            </div>
+            <div class='titlebar-logo-subtitle'>
+                {% block navbar-subtitle %}Capture The Flag{% endblock %}
+            </div>
+        </a>
+
+        <div class="titlebar-menu">
+            <div class="auth">
                 {% if user.is_authenticated %}
-                    <li id="username"><a href="{% url "profile" %}">
+                    <div id="username"><a id="menulink" href="{% url "profile" %}">
                         <span class="glyphicon glyphicon-user"></span>
                          - 
                         {{ user.username }}
-                    </a></li>
-                    <li><a href="{% url "logout" %}">Logout</a></li>
+                    </a></div>
+                    <div><a id="menulink" href="{% url "logout" %}">Logout</a></div>
                 {% else %}
-                    <li id="login"><a href="{% url "login" %}">Login</a></li>
-                    <li id="register"><a href="{% url "register" %}">Register</a></li>
+                    <div id="login"><a id="menulink" href="{% url "login" %}">Login</a></div>
+                    <div id="register"><a id="menulink" href="{% url "register" %}">Register</a></div>
                 {% endif %}
-            </ul>
+            </div>
         </div>
-        <!-- /.navbar-collapse -->
-    </nav>
 
     <div class="container">
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </div>
 </body>
 <script src="{% static "js/jquery-1.10.2.js" %}"></script>
