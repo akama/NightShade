@@ -12,37 +12,39 @@
 </head>
 
 <body>
-<div class="colorbar-right"></div>
-<div class="colorbar-left"></div>
+<div class="container">
 
-        <a class="titlebar-logo" href="{% url "home_page" %}">
-            <div class="titlebar-logo-title">
-                {% block navbar-title %}ISUSEC{% endblock %}
-            </div>
-            <div class='titlebar-logo-subtitle'>
-                {% block navbar-subtitle %}Capture The Flag{% endblock %}
-            </div>
-        </a>
-
-        <div class="titlebar-menu">
-            <div class="auth">
-                {% if user.is_authenticated %}
-                    <div id="username"><a id="menulink" href="{% url "profile" %}">
-                        <span class="glyphicon glyphicon-user"></span>
-                         - 
-                        {{ user.username }}
-                    </a></div>
-                    <div><a id="menulink" href="{% url "logout" %}">Logout</a></div>
-                {% else %}
-                    <div id="login"><a id="menulink" href="{% url "login" %}">Login</a></div>
-                    <div id="register"><a id="menulink" href="{% url "register" %}">Register</a></div>
-                {% endif %}
-            </div>
+    <a class="titlebar-logo" href="{% url "home_page" %}">
+        <div class="titlebar-logo-title">
+            {% block navbar-title %}ISUSEC{% endblock %}
         </div>
-
-    <div class="container">
-        {% block content %}{% endblock %}
+        <div class='titlebar-logo-subtitle'>
+            {% block navbar-subtitle %}Capture The Flag{% endblock %}
+        </div>
+    </a>
+    <div class="titlebar-menu">
+        <div class="auth">
+            {% if user.is_authenticated %}
+                <div id="username"><a id="menulink" href="{% url "profile" %}">
+                    <span class="glyphicon glyphicon-user"></span>
+                     - 
+                    {{ user.username }}
+                </a></div>
+                <div><a id="menulink" href="{% url "logout" %}">Logout</a></div>
+            {% else %}
+                <div id="login"><a id="menulink" href="{% url "login" %}">Login</a></div>
+                <div id="register"><a id="menulink" href="{% url "register" %}">Register</a></div>
+            {% endif %}
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+                {% block content %}{% endblock %}
+        </div>
+    </div>
+
+</div>
 </body>
 <script src="{% static "js/jquery-1.10.2.js" %}"></script>
 <script src="{% static "js/bootstrap.min.js" %}"></script>

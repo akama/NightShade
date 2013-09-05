@@ -7,20 +7,24 @@
 /*
 ------------------------------------------------------------------------------------*/
 html {
-	overflow: visible;
+	overflow-y: scroll;
+	height: 100%;
 }
 
 body {
 	background-color: white;
+	height: 100%;
+	background-image: url('../img/pixel_weave.png')
 }
 
 .container {
-	padding-top: 210px;
-	padding-left: 50px;
-	margin-left: 20%;
-	width: 60%;
+	height: 100%;
+	background-image: url('../img/vbar.png'), url('../img/vbar_inverted.png');
+	background-color: white;
+	background-position: left top, right top;
+	background-repeat: repeat-y;
+	padding: 0;
 }
-
 
 /*----------------------------------------------------------------------------------*/
 /* `Page margins
@@ -111,11 +115,9 @@ body {
 
 .titlebar-menu {
 	background-color: #222;
-	position: absolute;
-	margin-left: 45%;
-	width: 35%;
 	height: 70px;
 	font-size: 17px;
+	margin-bottom: 150px;
 }
 
 .titlebar-menu-tab {
@@ -133,17 +135,16 @@ body {
 /* `Titlebar Logo Stuff < Navbar Stuff
 -----------------------------------------------*/
 .titlebar-logo {
-	margin-left: 20%;
 	font-family: pennStation;
 	text-align: center;
 	color: white;
 	position: absolute;
 	height: 200px;
-	width: 25%;
+	width: 500px;
 	padding-top: 40px;
 	background-color: #222;
 	border-radius: 0 0 10px 0;
-	background-repeat: repeat-y;
+	z-index: 1;
 }
 
 .titlebar-logo:hover {
@@ -176,9 +177,12 @@ body {
 }
 
 a#menulink {
-	padding-top: 20px;
 	position: relative;
 	top: 20px;
+}
+
+a#menulink:hover {
+
 }
 
 div#username {
