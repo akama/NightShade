@@ -6,7 +6,6 @@
 
     <p class="score">Category: {{ object.category }}</p>
 
-<<<<<<< HEAD
     <div class="row">
         <div class="col-md-10">
             <div class="well">{{ object.description|linebreaks }}</div>
@@ -24,22 +23,5 @@
             <p>You have already solved this challenge.</p>
         {% endif %}
     </div>
-=======
-    <p><pre>{{ object.description }}</pre></p>
-
-
-    {% if not solved %}
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit flag.">
-        </form>
-    {% else %}
-        <p>You have already solved this challenge.</p>
-    {% endif %}
->>>>>>> a2efd02aad22a0b9b97d620075541fb5b6201792
-
-
-
 
 {% endblock %}
