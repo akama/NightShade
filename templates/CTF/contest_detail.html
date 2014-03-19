@@ -4,16 +4,14 @@
 
     <h1> {{ object.title }} </h1>
 
-    <div class="row">
+    <div class="row" style="margin-bottom: 40px;">
         <div class="col-md-10">
             <p>{{ object.description|linebreaks }}</p>
         </div>
     </div>
 
     <div class="row">
-      <table class="table table-bordered table-striped"
-             style="width: 60%;
-                    margin-top: 40px;">
+      <table id="challenges_table" class="table table-bordered table-striped display" style="margin-bottom: 40px;">
         <thead>
           <tr>
             <th>Challenge</th>
@@ -38,9 +36,7 @@
         </tbody>
       </table>
 
-      <table class="table table-bordered table-striped"
-             style="width: 60%;
-                    margin-top: 40px;">
+      <table id="users" class="table table-bordered table-striped display">
         <thead>
           <tr>
             <th>Name</th>
@@ -58,4 +54,11 @@
         </tbody>
       </table>
     </div>
+
+    <script>
+      $(document).ready(function() {
+        $('#challenges_table').dataTable();
+      });
+    </script>
+
 {% endblock %}
