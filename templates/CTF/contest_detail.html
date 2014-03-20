@@ -17,6 +17,7 @@
             <th>Challenge</th>
             <th>Category</th>
             <th>Value</th>
+            <th>Times Solved</th>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@
             </td>
             <td>{{ challenge.category }}</td>
             <td>{{ challenge.points }}</td>
+            <td>{{ challenge.score_set.count }}</td>
           </tr>
         {% endif %}
     {% endfor %}
