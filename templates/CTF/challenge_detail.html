@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}CTF: {{ object.title }}{% endblock %}
+
 {% block content %}
 
     <h3 class="score">{{ object.points }} - {{ object.title }}</h3>
@@ -33,4 +35,5 @@
             {% endfor %}
         {% endif %}
     </script>
+
 {% endblock %}
