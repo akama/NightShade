@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -61,7 +62,12 @@ def ChallengeView(request, slug):
         if form.is_valid() and not challenge.solved(request.user):
             score = Score(challenge=challenge, user=request.user, contest=challenge.contest)
             score.save()
+            print("Good Flag!")
+            messages.add_message(request, messages.SUCCESS, 'Challenge Solved!')
             return HttpResponseRedirect(reverse('challenge-view', args=(slug,)))
+        else:
+            print("Bad Flag!")
+            messages.add_message(request, messages.ERROR, 'That is not the flag!')
     else:
         form = ChallengeScoreForm()
 

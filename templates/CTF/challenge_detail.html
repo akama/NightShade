@@ -24,4 +24,13 @@
         {% endif %}
     </div>
 
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                $(document).ready(function () {
+                    $.notifyBar({cssClass:"{{ message.tags }}", html: "{{ message }}" });
+                });
+            {% endfor %}
+        {% endif %}
+    </script>
 {% endblock %}
