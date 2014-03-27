@@ -24,7 +24,7 @@ def current_datetime(request):
 
 def home_page(request):
     contests = Contest.objects.filter(active=True)
-    return render(request, 'home.html', {'contests': contests}, context_instance=RequestContext(request), )
+    return render(request, 'home.html', {'contests': contests.iterator()}, context_instance=RequestContext(request), )
 
 
 def register(request):
