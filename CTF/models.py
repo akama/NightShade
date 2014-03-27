@@ -2,6 +2,7 @@ from hashlib import md5
 from random import random
 from operator import itemgetter
 
+from django.db.models import Sum, Max
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
@@ -15,6 +16,9 @@ class Score(models.Model):
     challenge = models.ForeignKey('Challenge')
     completed = models.DateTimeField(auto_now_add=True)
     contest = models.ForeignKey('Contest')
+    
+    class Meta:
+        unique_together = (('user','challenge'),)
 
     def __str__(self):
         return "{0}:{1} for {2} points".format(self.challenge, self.user, self.challenge.points)
@@ -38,21 +42,15 @@ class Contest(models.Model):
 
     def __str__(self):
         return self.title
-
+        
     def score_board(self):
-        results = self.score_set.all()
+        results = self.score_set
         sorted_results = []
-        found_match = False
-        for score in results:
-            for foo in sorted_results:
-                if score.user.username == foo[0]:
-                    foo[1] = foo[1] + score.get_points()
-                    if score.completed > foo[2]:
-                        foo[2] = score.completed
-                    found_match = True
-            if not found_match:
-                sorted_results.append([score.user.username, score.get_points(), score.completed])
-            found_match = False
+        for user in results.values_list('user',flat=True):
+            user_results = results.filter(user=user)
+            score = user_results.aggregate(s=Sum('challenge.points'))['s']
+            completed = user_results.aggregate(m=Max('completed'))['m']
+            sorted_results.append([user.username, score, completed]     
 
         # sorting bitches
         sorted_results.sort(key=itemgetter(2))
@@ -94,14 +92,7 @@ class Challenge(models.Model):
         super(Challenge, self).save(*args, **kwargs)
 
     def solved(self, user):
-        try:
-            self.score_set.get(user=user).user
-            return True
-        except Score.DoesNotExist:
-            return False
-        except TypeError:
-            return False
-
+        return self.score_set.filter(user=user).exists()
 
 class ChallengeAdmin(admin.ModelAdmin):
     exclude = ('slug'),

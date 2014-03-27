@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
@@ -23,13 +23,8 @@ def current_datetime(request):
 
 
 def home_page(request):
-    contests = []
-
-    for contest in Contest.objects.all():
-        if contest.active:
-            contests.append(contest)
-
-    return render(request, 'home.html', {'contests': contests}, context_instance=RequestContext(request), )
+    contests = Contest.objects.filter(active=True)
+    return render(request, 'home.html', {'contests': contests.iterator()}, context_instance=RequestContext(request), )
 
 
 def register(request):
@@ -51,7 +46,7 @@ def profile(request):
 
 
 def ChallengeView(request, slug):
-    challenge = Challenge.objects.get(slug=slug)
+    challenge = get_object_or_404(Challenge,slug=slug,active=True)
 
     if request.method == 'POST' and not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
