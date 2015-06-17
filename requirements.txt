@@ -1,10 +1,11 @@
-Django==1.5.2
+Django==1.8.2
 argparse==1.2.1
 distribute==0.6.24
-dj-database-url==0.2.2
-dj-static==0.0.5
+dj-database-url==0.3.0
+dj-static==0.0.6
 django-toolbelt==0.0.1
-gunicorn==18.0
-psycopg2==2.5.1
+gunicorn==19.3.0
+psycopg2==2.6.1
 static==0.4
+static3==0.6.1
 wsgiref==0.1.2
