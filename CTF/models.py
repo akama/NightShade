@@ -8,8 +8,6 @@ from django.contrib import admin
 from django.template.defaultfilters import slugify
 
 
-# Create your models here.
-
 class Score(models.Model):
     user = models.ForeignKey(User)
     challenge = models.ForeignKey('Challenge')
@@ -34,7 +32,7 @@ class Contest(models.Model):
     title = models.CharField(max_length=200, unique=True)
     description = models.TextField()
     slug = models.SlugField(max_length=200, unique=True)
-    active = models.BooleanField()
+    active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -82,7 +80,7 @@ class Challenge(models.Model):
     description = models.TextField()
     points = models.IntegerField()
     key = models.CharField(max_length=20, default=md5(str(random()).encode()).hexdigest()[:8].upper())
-    active = models.BooleanField()
+    active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

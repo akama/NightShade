@@ -1,5 +1,4 @@
 import os
-import dj_database_url
 
 # Django settings for NightShade project.
 
@@ -15,8 +14,19 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'tenant_schemas.postgresql_backend',
+        'NAME': 'nightshade',
+        'USER': 'tester',
+        'PASSWORD': 'test_password',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
 }
+
+DATABASE_ROUTERS = (
+    'tenant_schemas.routers.TenantSyncRouter',
+)
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PRONTO', 'https')
 
@@ -71,60 +81,78 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-		    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-		        # Always use forward slashes, even on Windows.
-			    # Don't forget to use absolute paths, not relative paths.
-			        os.path.join(PROJECT_PATH, 'static'),
-				)
+        # Put strings here, like "/home/html/static" or "C:/www/django/static".
+        # Always use forward slashes, even on Windows.
+        # Don't forget to use absolute paths, not relative paths.
+        os.path.join(PROJECT_PATH, 'static'),
+    )
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-		    'django.contrib.staticfiles.finders.FileSystemFinder',
-		        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-			    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-			    )
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        #'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    )
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '3$bp7g172awaq+9!3n7jp&ml35=r71q2#$mphjd+t(1t+23igx'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-		    'django.template.loaders.filesystem.Loader',
-		        'django.template.loaders.app_directories.Loader',
-			    #     'django.template.loaders.eggs.Loader',
-			    )
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+        #     'django.template.loaders.eggs.Loader',
+    )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+)
 
 MIDDLEWARE_CLASSES = (
-		    'django.middleware.common.CommonMiddleware',
-		        'django.contrib.sessions.middleware.SessionMiddleware',
-			    'django.middleware.csrf.CsrfViewMiddleware',
-			        'django.contrib.auth.middleware.AuthenticationMiddleware',
-				    'django.contrib.messages.middleware.MessageMiddleware',
-				        # Uncomment the next line for simple clickjacking protection:
-					    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-					    )
+        'tenant_schemas.middleware.TenantMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        # Uncomment the next line for simple clickjacking protection:
+        # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    )
 
 ROOT_URLCONF = 'NightShade.urls'
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'NightShade.wsgi.application'
 
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\', '/'),)
 
-INSTALLED_APPS = (
-            'django.contrib.auth',
-            'django.contrib.contenttypes',
-            'django.contrib.sessions',
-            'django.contrib.sites',
-            'django.contrib.messages',
-            'django.contrib.staticfiles',
-            # Uncomment the next line to enable the admin:
-            'django.contrib.admin',
-            # Uncomment the next line to enable admin documentation:
-            # 'django.contrib.admindocs',
-            'CTF',
-        )
+TENANT_APPS = (
+    'django.contrib.contenttypes',
+    'django.contrib.staticfiles',
+    # Uncomment the next line to enable the admin:
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
+    'django.contrib.admin',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'CTF',
+    'django.contrib.auth',
+)
+
+SHARED_APPS = (
+    'tenant_schemas',  # mandatory
+    'customers',
+    'django.contrib.contenttypes',
+)
+
+INSTALLED_APPS = list(set(SHARED_APPS + TENANT_APPS))
+
+TENANT_MODEL = "customers.Client" # app.Model
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
