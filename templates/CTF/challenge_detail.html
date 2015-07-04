@@ -3,27 +3,27 @@
 {% block title %}CTF: {{ object.title }}{% endblock %}
 
 {% block content %}
+    <div class="challenge-details col-md-offset-1 col-md-10">
+        <div class="challenge-main-title">{{ object.title }}</div>
 
-    <h3 class="score">{{ object.points }} - {{ object.title }}</h3>
+        <div class="challenge-subtitle">{{ object.points }} Points ● {{ object.category }}</div>
+        <hr class="menu-divider"> </hr>
 
-    <p class="score">Category: {{ object.category }}</p>
+        <div class="challenge-text">{{ object.description|linebreaks }}</div>
 
-    <div class="row">
-        <div class="col-md-10">
-            <div class="well">{{ object.description|linebreaks }}</div>
+        <hr class="menu-divider"> </hr>
+
+        <div class="challenge-submission">
+            {% if not solved %}
+                <form class="input-flag" action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="input-flag-button" type="submit" value="Submit flag.">
+                </form>
+            {% else %}
+                <p>You have already solved this challenge.</p>
+            {% endif %}
         </div>
-    </div>
-
-    <div class="row">
-        {% if not solved %}
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Submit flag.">
-            </form>
-        {% else %}
-            <p>You have already solved this challenge.</p>
-        {% endif %}
     </div>
 
     <script>

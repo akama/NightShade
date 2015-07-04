@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------------*/
-/* 
+/*
 /* * Custom Style Sheet for NightShade CTF App *
 /*
 /*   author: b0b
@@ -7,7 +7,7 @@
 /*
 ------------------------------------------------------------------------------------*/
 html {
-	overflow-y: scroll; 
+	overflow-y: scroll;
 	height: 100%;
 	margin: 0;
 	padding: 0;
@@ -15,44 +15,174 @@ html {
 
 body {
 	background-color: white;
-	height: 100%;
-	background-image: url('../img/pixel_weave.png')
+	background-color: #222;
 }
 
 .container {
 	min-height: 100%;
-	background-image: url('../img/vbar.png'), url('../img/vbar_inverted.png');
-	background-color: white;
-	background-position: left top, right top;
 	background-repeat: repeat-y;
 	padding: 0;
 }
 
-.row {
-	
+.menu-bar {
+	margin-top: 10px;
+	font-size: 16px;
+	font-family: Anonymous;
+	src: url("../fonts/Anonymous.ttf");
 }
 
-/*----------------------------------------------------------------------------------*/
-/* `Page margins
-------------------------------------------------------------------------------------*/
-.colorbar-left {
-	box-shadow: 10px 10px 10px 0px;
-	position: absolute;
-	left: 0;
-	background-image: url('../img/pixel_weave.png');
-	width: 20%;
-	height: 100%;
+.menu-user {
+	float: right;
 }
 
-.colorbar-right {
-	box-shadow: 10px 10px 10px 20px;
-	position: absolute;
-	right: 0;
-	background-image: url('../img/pixel_weave.png');
-	width: 20%;
-	height: 100%;
+.menu-divider {
+	border: 0;
+  width: 96%;
+  border-top: 1px solid #444444;
+  height: 1px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
+.contest-list {
+	align-items: center;
+}
+
+.challenge-title {
+	color: white;
+	padding-top: 30px;
+	font-size: 18px;
+	padding-bottom: 50px;
+}
+
+.challenge-main-title {
+	color: white;
+	font-size: 18px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.challenge-subtitle {
+	color: #969696;
+	padding-bottom: 10px;
+}
+
+.challenge-listing {
+	color: #ED4787;
+	font-size: 16px;
+	display:inline;
+	width: 100%;
+}
+
+.challenge-listing a:link {
+	color: #ED005B;
+}
+
+.challenge-listing a:visited {
+	color: #ED4787;
+}
+
+.challenge-following {
+	display:  inline;
+	color: #969696;
+}
+
+.challenge-details {
+	color: white;
+}
+
+.challenge-submission {
+	padding-top: 20px;
+}
+
+.challenge-text {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.score-item {
+	padding-bottom: 2px;
+}
+
+.score-title {
+	color: white;
+	padding-top: 30px;
+	font-size: 18px;
+	padding-bottom: 50px;
+	text-align: right;
+}
+
+.score-list {
+}
+
+.score-name {
+	display:inline;
+	color: white;
+	padding-bottom: 20px;
+	color: #51CCDD;
+}
+
+.score-number {
+	display: inline;
+	color: white;
+	float: right;
+}
+
+.input-flag input[type="text"] {
+  border-bottom: solid 2px #c9c9c9;
+  transition: border 0.3s;
+  border: 1px solid white;
+	background-color: #222;
+	color: white;
+	display: inline;
+  width: 300px;
+}
+
+.input-flag input[type="password"] {
+  border-bottom: solid 2px #c9c9c9;
+  transition: border 0.3s;
+  border: 1px solid white;
+	background-color: #222;
+	color: white;
+	display: inline;
+  width: 300px;
+}
+
+.input-flag p {
+	display: inline;
+}
+
+.input-flag label {
+	display: none;
+}
+
+.input-flag input[type="text"]:focus,
+.input-flag input[type="text"].focus {
+  border-bottom: solid 2px #969696;
+}
+
+.input-flag input[type="password"]:focus,
+.input-flag input[type="password"].focus {
+  border-bottom: solid 2px #969696;
+}
+
+.input-flag-button {
+	display: inline;
+	background-color: #222;
+	border: 1px solid white;
+	color: white;
+}
+
+.login-title {
+	color: white;
+	padding-top: 10px;
+	font-size: 18px;
+	padding-bottom: 10px;
+}
+
+}
+
+*{font-family:Anonymous;}
 
 /*----------------------------------------------------------------------------------*/
 /* `Contest Content Stuff
@@ -71,12 +201,6 @@ body {
 
 .contest.description {
 
-}
-
-.line-spacer {
-	margin: 20px auto;
-	background-color: black;
-	height: 2px;
 }
 
 /*----------------------------------------------------------------------------------*/
@@ -105,69 +229,17 @@ body {
 	background-color: #222;
 }
 
-.modal-content {
-	background-image: url('../img/pixel_weave.png')
-}
-
-
 /*----------------------------------------------------------------------------------*/
 /* `Titlebar Stuff
 ------------------------------------------------------------------------------------*/
 @font-face {
-	font-family: pennStation;
-	src: url("../fonts/Pennstat.ttf");
-}
-
-.titlebar-menu {
-	background-color: #222;
-	height: 70px;
-	font-size: 17px;
-	margin-bottom: 150px;
-}
-
-.titlebar-menu-tab {
-	position: relative;
-	background-color: white;
-	width: 60px;
-	height: 50%;
-	border-top-right-radius: 30px;
-	border-top-left-radius: 30px;
-}
-
-.titlebar-menu-inner-tab {
+	font-family: Anonymous;
+	src: url("../fonts/Anonymous.ttf");
 }
 
 /* `Titlebar Logo Stuff < Navbar Stuff
 -----------------------------------------------*/
-.titlebar-logo {
-	font-family: pennStation;
-	text-align: center;
-	color: white;
-	position: absolute;
-	height: 200px;
-	width: 500px;
-	padding-top: 40px;
-	background-color: #222;
-	border-radius: 0 0 10px 0;
-	z-index: 1;
-}
 
-.titlebar-logo:hover {
-	background-color: #474747;
-	color: white;
-	text-decoration: none;
-}
-
-.titlebar-logo-title {
-	font-size: 100px;
-	line-height: 1;
-}
-
-.titlebar-logo-subtitle {
-	font-family: 'Monospace';
-	font-size: 25px;
-	line-height: 1;
-}
 /*---------------------------------------------*/
 
 

@@ -1,61 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <h1> {{ object.title }} </h1>
-
-    <div class="row" style="margin-bottom: 40px;">
-        <div class="col-md-10">
-            <p>{{ object.description|linebreaks }}</p>
-        </div>
+  <div class="challenge-list col-md-8">
+    <div class="challenge-title"
+      <h1> Challenges - {{ object.title }} </h1>
     </div>
 
-    <div class="row">
-      <table id="challenges_table" class="table table-bordered table-striped display">
-        <thead>
-          <tr>
-            <th>Challenge</th>
-            <th>Category</th>
-            <th>Value</th>
-            <th>Times Solved</th>
-          </tr>
-        </thead>
-        <tbody>
     {% for challenge in object.challenge_set.all %}
-        {% if challenge.active %}
-          <tr>
-            <td>
-                <a href="{% url 'challenge-view' challenge.slug %}">
-                    {{ challenge.title }}
-                </a>
-            </td>
-            <td>{{ challenge.category }}</td>
-            <td>{{ challenge.points }}</td>
-            <td>{{ challenge.score_set.count }}</td>
-          </tr>
-        {% endif %}
+      {% if challenge.active %}
+        <div class="challenge-item">
+          <div href="{% url 'challenge-view' challenge.slug %}" class="challenge-listing">
+            <a href="{% url 'challenge-view' challenge.slug %}">
+              {{ challenge.title }}
+            </a>
+          </div>
+          <div class="challenge-following">
+            ● {{ challenge.category }} ● {{ challenge.points }} Points ● Solved by
+            {% if challenge.score_set.count == 1 %}
+              {{ challenge.score_set.count }} person
+            {% else %}
+              {{ challenge.score_set.count }} people
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+      <br>
     {% endfor %}
-        </tbody>
-      </table>
-
-      <table id="users" class="table table-bordered table-striped display" style="margin-top: 100px; margin-right: 100px">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-    {% for person, score, time in object.score_board %}
-
-          <tr>
-            <td>{{ person }}</td>
-            <td>{{ score }}</td>
-          </tr>
-    {% endfor %}
-        </tbody>
-      </table>
+  </div>
+  <div class="col-md-3 col-md-offset-1 score-list">
+    <div class="score-title"
+      <h1> Score List </h1>
     </div>
+
+    {% for person, score, time in object.score_board %}
+      <div class="score-item">
+        <div class="score-name">
+          {{ person }}
+        </div>
+        <div class="score-number">
+          {{ score }}
+        </div>
+        <br>
+      </div>
+    {% endfor %}
+  </div>
 
     <script>
       $(document).ready(function() {
