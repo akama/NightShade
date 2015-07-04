@@ -1,8 +1,9 @@
-Django==1.8.2
+Django==1.7.8
 argparse==1.2.1
 distribute==0.6.24
 dj-database-url==0.3.0
 dj-static==0.0.6
+django-tenant-schemas==1.5.2
 django-toolbelt==0.0.1
 gunicorn==19.3.0
 psycopg2==2.6.1
