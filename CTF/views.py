@@ -78,4 +78,11 @@ class ContestDetailView(DetailView):
     model = Contest
 
     def get_context_data(self, **kwargs):
-        return super(ContestDetailView, self).get_context_data(**kwargs)
+        context = super(ContestDetailView, self).get_context_data(**kwargs)
+        challenges = []
+        if self.request.user.is_authenticated():
+            challenges = [(challenge, challenge.solved(self.request.user)) for challenge in self.object.challenge_set.all()]
+        else:
+            challenges = [(challenge, False) for challenge in self.object.challenge_set.all()]
+        context['challenges'] = challenges
+        return context

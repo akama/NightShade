@@ -6,10 +6,15 @@
       <h1> Challenges - {{ object.title }} </h1>
     </div>
 
-    {% for challenge in object.challenge_set.all %}
+    {% for challenge, solved in challenges %}
       {% if challenge.active %}
         <div class="challenge-item">
-          <div href="{% url 'challenge-view' challenge.slug %}" class="challenge-listing">
+          <div class="challenge-mark">
+              {% if solved %}
+                ✓
+              {% endif %}
+          </div>
+          <div class="challenge-listing">
             <a href="{% url 'challenge-view' challenge.slug %}">
               {{ challenge.title }}
             </a>

@@ -100,6 +100,11 @@ body {
 	padding-bottom: 20px;
 }
 
+.challenge-mark {
+  display: inline;
+  color: white;
+}
+
 .score-item {
 	padding-bottom: 2px;
 }

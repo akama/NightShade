@@ -12,17 +12,30 @@ ADMINS = (
 		)
 
 MANAGERS = ADMINS
+import os
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'tenant_schemas.postgresql_backend',
-        'NAME': 'nightshade',
-        'USER': 'tester',
-        'PASSWORD': 'test_password',
-        'HOST': 'localhost',
-        'PORT': '',
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'tenant_schemas.postgresql_backend',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'tenant_schemas.postgresql_backend',
+            'NAME': 'nightshade',
+            'USER': 'tester',
+            'PASSWORD': 'test_password',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 DATABASE_ROUTERS = (
     'tenant_schemas.routers.TenantSyncRouter',
@@ -70,7 +83,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = 'static'
 
 # Static asset configuration
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
