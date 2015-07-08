@@ -48,6 +48,12 @@ body {
 	align-items: center;
 }
 
+.contest-missing {
+  font-size: 14px;
+  color: #969696;
+  text-align: center;
+}
+
 .challenge-title {
 	color: white;
 	padding-top: 30px;
@@ -103,6 +109,16 @@ body {
 .challenge-mark {
   display: inline;
   color: white;
+}
+
+.challenge-missing {
+  color: #969696;
+  text-align: left;
+}
+
+.challenge-score-missing {
+  color: #969696;
+  text-align: right;\
 }
 
 .score-item {

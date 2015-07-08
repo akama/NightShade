@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.views.generic.detail import DetailView
+from django.shortcuts import redirect
 
 from CTF.models import Contest, Challenge, Score
 
@@ -28,6 +29,9 @@ def home_page(request):
     for contest in Contest.objects.all():
         if contest.active:
             contests.append(contest)
+
+    if len(contests) == 1:
+        return redirect(reverse('contest-view', args=(contests[0].slug,)))
 
     return render(request, 'home.html', {'contests': contests}, context_instance=RequestContext(request), )
 

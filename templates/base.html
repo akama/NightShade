@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{% block title %}ISUSec CTF{% endblock %}</title>
+    <title>ISUSec CTF {% block title %} {% endblock %}</title>
 
 
     <!-- CSS -->
@@ -31,7 +31,7 @@
     <div class="container">
         <div class="menu-bar col-md-12">
             <a class="" href="{% url "home_page" %}">
-                Capture the Flag: {% block navbar-title %}ISUSEC{% endblock %}
+                Capture the Flag: {% block navbar-title %}ISUSEC {% block extend_title %} {% endblock %}{% endblock %}
             </a>
 
             <div class="menu-user">

@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}CTF: {{ object.title }}{% endblock %}
+{% block extend_title %}
+  | {{object.contest.title}}
+{% endblock %}
+
+{% block title %}: {{ object.title }}{% endblock %}
 
 {% block content %}
     <div class="challenge-details col-md-offset-1 col-md-10">

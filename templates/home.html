@@ -12,6 +12,10 @@
         </div>
 		  <div class="line-spacer"></div>
     </div>
+    {% empty %}
+        <div class="contest-missing">
+            No contests are currently active. Please check back.
+        </div>
     {% endfor %}
 
 {% endblock %}
