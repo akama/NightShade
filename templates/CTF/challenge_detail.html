@@ -15,6 +15,17 @@
 
         <div class="challenge-text">{{ object.description|linebreaks }}</div>
 
+        {% if files %}
+            <div class="file-downloads">
+            {% for file in files %}
+            <a href="{{ file.fileObject.url }}"> 
+                <span class="glyphicon glyphicon-download"></span>
+                {{ file }}
+            </a>
+            {% endfor %}
+            </div>
+        {% endif %}
+
         <hr class="menu-divider"> </hr>
 
         <div class="challenge-submission">

@@ -40,7 +40,7 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            new_user = form.save()
+            form.save()
             return HttpResponseRedirect(reverse('home'))
     else:
         form = UserCreationForm()
@@ -75,7 +75,9 @@ def ChallengeView(request, slug):
 
     solved = challenge.solved(request.user)
 
-    return render(request, 'CTF/challenge_detail.html', {'object': challenge, 'form': form, 'solved': solved})
+    return render(request, 'CTF/challenge_detail.html',
+                  {'object': challenge, 'form': form, 'solved': solved,
+                   'files': challenge.challengefile_set.all()})
 
 
 class ContestDetailView(DetailView):

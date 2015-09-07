@@ -77,7 +77,7 @@ MEDIA_ROOT = ''
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+# MEDIA_URL = ''
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -161,6 +161,7 @@ SHARED_APPS = (
     'tenant_schemas',  # mandatory
     'customers',
     'django.contrib.contenttypes',
+    'storages',
 )
 
 INSTALLED_APPS = list(set(SHARED_APPS + TENANT_APPS))
@@ -195,3 +196,11 @@ LOGGING = {
         },
     }
 }
+
+AWS_STORAGE_BUCKET_NAME = 'nightshade-files'
+AWS_ACCESS_KEY_ID = 'AKIAJ6I6K3O43KF52HSA'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
