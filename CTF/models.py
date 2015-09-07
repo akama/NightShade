@@ -72,6 +72,10 @@ class ContestAdmin(admin.ModelAdmin):
 admin.site.register(Contest, ContestAdmin)
 
 
+def genRandomFlag():
+    return md5(str(random()).encode()).hexdigest()[:16].upper()
+
+
 class Challenge(models.Model):
     contest = models.ForeignKey(Contest)
     title = models.CharField(max_length=200, unique=True)
@@ -79,7 +83,7 @@ class Challenge(models.Model):
     category = models.CharField(max_length=200)
     description = models.TextField()
     points = models.IntegerField()
-    key = models.CharField(max_length=20, default=md5(str(random()).encode()).hexdigest()[:8].upper())
+    key = models.CharField(max_length=200, default=genRandomFlag)
     active = models.BooleanField(default=False)
 
     def __str__(self):
@@ -106,5 +110,3 @@ class ChallengeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Challenge, ChallengeAdmin)
-
-

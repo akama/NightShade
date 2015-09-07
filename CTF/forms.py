@@ -2,7 +2,7 @@ from django import forms
 
 
 class ChallengeScoreForm(forms.Form):
-    submission = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'placeholder': ' Flag'}))
+    submission = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder': ' Flag'}))
     key = ''
 
     def __init__(self, *args, **kwargs):
