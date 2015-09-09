@@ -51,7 +51,7 @@ def register(request):
 
 @login_required
 def profile(request):
-    return HttpResponseRedirect(reverse('home'))
+    return render(request, 'CTF/profile.html', {'object': request.user, 'challenges': request.user.score_set.all()})
 
 
 def ChallengeView(request, slug):

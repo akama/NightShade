@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block extend_title %}
+  | {{object.username}}
+{% endblock %}
+
+{% block title %}: {{ object.username }}{% endblock %}
+
+{% block content %}
+
+    <div class="challenge-main-title">
+        Profile: {{ object.username }}
+    </div>
+
+    <div class="challenge-subtitle">
+        Challenges Solved
+    </div>
+
+    <div class="challenge-list">
+        {% for challenge in challenges %}
+            <div class="challenge-item">
+                <div class="challenge-following">
+                    {{ challenge.contest }}:
+                </div>
+                <div class="challenge-listing">
+                    {{ challenge.challenge }}
+                </div>
+                <div class="challenge-following">
+                    ⚫ {{ challenge.completed }}
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    </div> 
+
+{% endblock %}
