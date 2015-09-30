@@ -201,6 +201,17 @@ body {
 	padding-bottom: 10px;
 }
 
+.profile-main-title {
+    color: white;
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+.profile-challenge {
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    font-size: 16px;
 }
 
 *{font-family:Anonymous;}

@@ -23,7 +23,7 @@ urlpatterns = patterns('',
   url(r'^accounts/login/$', login, name='login'),
   url(r'^accounts/logout/$', logout, name='logout'),
   url(r'^accounts/register/$', register, name='register'),
-  url(r'^accounts/profile/$', profile, name='profile'),
+  url(r'^accounts/profile/(?P<username>[-_\w]+)/', profile, name='profile'),
 
   # Uncomment the admin/doc line below to enable admin documentation:
   url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
