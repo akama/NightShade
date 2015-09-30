@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.views.generic.detail import DetailView
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
 
 from CTF.models import Contest, Challenge, Score
 
@@ -49,9 +50,26 @@ def register(request):
     })
 
 
-@login_required
-def profile(request):
-    return HttpResponseRedirect(reverse('home'))
+def profile(request, username):
+    user = User.objects.get(username=username)
+    user_score_set = user.score_set.all()
+    contests = []
+    results = {}
+
+    for score in user_score_set:
+        if score.contest not in contests:
+            contests.append(score.contest)
+
+    for contest in contests:
+        scores_for_contest = []
+        total_score = 0
+        for score in user_score_set:
+            if score.contest == contest:
+                scores_for_contest.append(score)
+                total_score += score.challenge.points
+        results[contest] = (scores_for_contest, total_score)
+
+    return render(request, 'CTF/profile.html', {'object': user, 'challenges': results})
 
 
 def ChallengeView(request, slug):

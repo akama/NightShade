@@ -105,8 +105,10 @@ class Challenge(models.Model):
         except TypeError:
             return False
 
+
 def challengeFilePath(instance, filename):
     return '%s/%s' % (instance.challenge.title, filename)
+
 
 class ChallengeFile(models.Model):
     challenge = models.ForeignKey(Challenge)
@@ -118,6 +120,7 @@ class ChallengeFile(models.Model):
         else:
             return 'None'
 
+
 @receiver(models.signals.post_delete, sender=ChallengeFile)
 def remove_file_from_s3(sender, instance, using, **kwargs):
     instance.fileObject.delete(save=False)
@@ -127,8 +130,9 @@ class ChallengeFileAdmin(admin.StackedInline):
     model = ChallengeFile
     extra = 3
 
+
 class ChallengeAdmin(admin.ModelAdmin):
-    exclude = [('slug'),]
+    exclude = [('slug'), ]
     inlines = [ChallengeFileAdmin]
 
 admin.site.register(Challenge, ChallengeAdmin)

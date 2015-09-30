@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block extend_title %}
+  | {{object.username}}
+{% endblock %}
+
+{% block title %}: {{ object.username }}{% endblock %}
+
+{% block content %}
+
+        <div class="profile-main-title">
+            Profile: {{ object.username }}
+            <br>
+            Total Contests: {{ challenges|length}}
+        </div>
+
+            {% for contest, results in challenges.items %}
+                <div class="profile-challenge">
+                    Contest: {{ contest }} 
+                    <br>
+                    Total Score: {{ results.1 }}
+                </div>
+                <br>
+                {% for score in results.0 %}
+                    <div class="challenge-item">
+                            <div class="challenge-listing">
+                                {{ score.challenge }}
+                            </div>
+                            <div class="challenge-following">
+                                ● {{ score.completed }}
+                            </div>
+                        <br>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+{% endblock %}
