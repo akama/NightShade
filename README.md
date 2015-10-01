@@ -52,7 +52,8 @@ Note on using manage.py, you will have to prefix commands with 'tenant_command'.
 
     python manage.py tenant_command createsuperuser
 
-Then you will have to enter the schema you wish to use, which is the shortname/schema_name from above. After that, everything should continue to be normal. Speaking of which, you should go ahead and create a superuser using the command above. 
+Then you will have to enter the schema you wish to use, which is the shortname/schema_name from above. After that, everything should continue to be normal. 
+Speaking of which, you should go ahead and create a superuser using the command above. Then visit your.domain.here.com/admin and get started creating your first contest.
 
 You may now serve NightShade using anyway you would like. Nginx and gunicorn is how I serve it, but other ways should work just as well.
 
