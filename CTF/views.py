@@ -119,10 +119,21 @@ def jeopardy_view(request, slug):
     catagories = {}
     challenges = contest.challenge_set.all()
     for challenge in challenges:
-        if challenge.category not in catagories:
-            catagories[challenge.category] = [challenge]
+        # Add if the user has solved the challenge or not
+        if request.user.is_authenticated and challenge.solved(request.user):
+            challenge_to_add = (challenge, True)
         else:
-            catagories[challenge.category].append(challenge)
-    print catagories
+            challenge_to_add = (challenge, False)
+
+        # Add challenge to category
+        if challenge.category not in catagories:
+            catagories[challenge.category] = [challenge_to_add]
+        else:
+            catagories[challenge.category].append(challenge_to_add)
+
+    for category, challenges in catagories.iteritems():
+        challenges.sort(key=lambda challenge_and_score: challenge_and_score[0].points)
+
+
     return render(request, 'CTF/contest_detail_jeopardy.html',
                     {'catagories': catagories, 'object': contest})

@@ -16,12 +16,17 @@
                 <div class="catagory-title">
                     {{ name }}
                 </div>
-                {% for challenge in catagory %}
+                {% for challenge, solved in catagory %}
                     {% if challenge.active %}
                         <td>
                             <div class="challenge-item">
                             <div class="challenge-listing">
                                 <a href="{% url 'challenge-view' challenge.slug %}">
+                                <div class="challenge-mark">
+                                    {% if solved %}
+                                        ✓
+                                    {% endif %}
+                                </div>
                                 {{ challenge.points }}
                                 </a>
                             </div>
