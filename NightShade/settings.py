@@ -3,8 +3,11 @@ import os
 # Django settings for NightShade project.
 
 
+if 'RDS_HOSTNAME' in os.environ:
+    DEBUG = False
+else:
+    DEBUG = True
 
-DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -109,7 +112,10 @@ STATICFILES_FINDERS = (
     )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '3$bp7g172awaq+9!3n7jp&ml35=r71q2#$mphjd+t(1t+23igx'
+if 'RDS_HOSTNAME' in os.environ:
+    SECRET_KEY = os.environ['SECRET_KEY']
+else:
+    SECRET_KEY = '3$bp7g172awaq+9!3n7jp&ml35=r71q2#$mphjd+t(1t+23igx'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -198,8 +204,8 @@ LOGGING = {
 }
 
 AWS_STORAGE_BUCKET_NAME = 'nightshade-files'
-AWS_ACCESS_KEY_ID = 'AKIAJ6I6K3O43KF52HSA'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
