@@ -121,6 +121,12 @@ body {
   text-align: right;\
 }
 
+.catagory-title {
+    color: white;
+    text-align: left;
+    font-size: 16px;
+}
+
 .score-item {
 	padding-bottom: 2px;
 }
@@ -141,6 +147,12 @@ body {
 	color: white;
 	padding-bottom: 20px;
 	color: #51CCDD;
+}
+
+table { 
+    border-spacing: 20px;
+    border-collapse: separate;
+    padding-right: 30px;
 }
 
 .score-number {

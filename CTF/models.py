@@ -30,10 +30,19 @@ admin.site.register(Score, ScoreAdmin)
 
 
 class Contest(models.Model):
+    LISTING = "L"
+    JEOPARDY = "J"
+
+    CONTEST_TYPES_CHOICES = (
+        (LISTING, "Listing"),
+        (JEOPARDY, "Jeopardy"),
+    )
+
     title = models.CharField(max_length=200, unique=True)
     description = models.TextField()
     slug = models.SlugField(max_length=200, unique=True)
     active = models.BooleanField(default=False)
+    contest_type = models.CharField(max_length=1, choices=CONTEST_TYPES_CHOICES, default=LISTING)
 
     def __str__(self):
         return self.title

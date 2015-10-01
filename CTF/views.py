@@ -6,7 +6,6 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from django.views.generic.detail import DetailView
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 
@@ -98,15 +97,32 @@ def ChallengeView(request, slug):
                    'files': challenge.challengefile_set.all()})
 
 
-class ContestDetailView(DetailView):
-    model = Contest
+def ContestView(request, slug):
+    contest = Contest.objects.get(slug=slug)
+    if contest.contest_type == Contest.JEOPARDY:
+        return jeopardy_view(request, slug)
+    else:
+        return listing_view(request, slug)
 
-    def get_context_data(self, **kwargs):
-        context = super(ContestDetailView, self).get_context_data(**kwargs)
-        challenges = []
-        if self.request.user.is_authenticated():
-            challenges = [(challenge, challenge.solved(self.request.user)) for challenge in self.object.challenge_set.all()]
+def listing_view(request, slug):
+    contest = Contest.objects.get(slug=slug)
+    challenges = []
+    if request.user.is_authenticated():
+        challenges = [(challenge, challenge.solved(request.user)) for challenge in contest.challenge_set.all()]
+    else:
+        challenges = [(challenge, False) for challenge in contest.challenge_set.all()]
+    return render(request, 'CTF/contest_detail.html',
+                    {'challenges': challenges, 'object': contest})
+
+def jeopardy_view(request, slug):
+    contest = Contest.objects.get(slug=slug)
+    catagories = {}
+    challenges = contest.challenge_set.all()
+    for challenge in challenges:
+        if challenge.category not in catagories:
+            catagories[challenge.category] = [challenge]
         else:
-            challenges = [(challenge, False) for challenge in self.object.challenge_set.all()]
-        context['challenges'] = challenges
-        return context
+            catagories[challenge.category].append(challenge)
+    print catagories
+    return render(request, 'CTF/contest_detail_jeopardy.html',
+                    {'catagories': catagories, 'object': contest})
