@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import login, logout
 from CTF.views import register, profile, ChallengeView, ContestView, home_page
+from django.views.generic.base import RedirectView
 
 
 # Uncomment the next two lines to enable the admin:
@@ -18,12 +19,13 @@ urlpatterns = patterns('',
   # CTF URL Patterns
   url(r'^contests/(?P<slug>[-_\w]+)/', ContestView, name='contest-view'),
   url(r'^challenge/(?P<slug>[-_\w]+)/', ChallengeView, name='challenge-view'),
-
+  url(r'^accounts/profile/(?P<username>[\.\-_\w]+)/', profile, name='profile'),
+  
   # Login patterns
   url(r'^accounts/login/$', login, name='login'),
   url(r'^accounts/logout/$', logout, name='logout'),
   url(r'^accounts/register/$', register, name='register'),
-  url(r'^accounts/profile/(?P<username>[\.-_\w]+)/', profile, name='profile'),
+  url(r'^accounts/profile/$', RedirectView.as_view(url='/', permanent=False), name='self-profile'),
 
   # Uncomment the admin/doc line below to enable admin documentation:
   url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

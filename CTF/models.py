@@ -1,13 +1,14 @@
 from hashlib import md5
 from random import random
 from operator import itemgetter
+import re
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 from django.template.defaultfilters import slugify
 from django.dispatch import receiver
-
+from django import forms
 
 class Score(models.Model):
     user = models.ForeignKey(User)
@@ -94,6 +95,7 @@ class Challenge(models.Model):
     description = models.TextField()
     points = models.IntegerField()
     key = models.CharField(max_length=200, default=genRandomFlag)
+    regex_key = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
 
     def __str__(self):
@@ -141,6 +143,9 @@ class ChallengeFileAdmin(admin.StackedInline):
 
 
 class ChallengeAdmin(admin.ModelAdmin):
+    from CTF.forms import ChallengeAdminForm
+
+    form = ChallengeAdminForm
     exclude = [('slug'), ]
     inlines = [ChallengeFileAdmin]
 

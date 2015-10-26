@@ -78,7 +78,7 @@ def ChallengeView(request, slug):
         return HttpResponseRedirect(reverse('login'))
 
     if request.method == 'POST':
-        kwargs = {'key': challenge.key}
+        kwargs = {'key': challenge.key, 'regex_key': challenge.regex_key}
         form = ChallengeScoreForm(request.POST, **kwargs)
         if form.is_valid() and not challenge.solved(request.user):
             score = Score(challenge=challenge, user=request.user, contest=challenge.contest)
