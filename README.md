@@ -5,14 +5,22 @@ SCREENSHOTS
 
 They say a screen shot is worth a thousand words.
 
+A challenge page.
 ![Challenge](https://github.com/UnrealAkama/NightShade/raw/master/screenshots/challenge.png)
 
+A jeopardy style capture the flag.
 ![Jeopardy Style CTF](https://github.com/UnrealAkama/NightShade/raw/master/screenshots/jeopardy_style_ctf.png)
 
+A traditional style capture the flag.
 ![Listing Style CTF](https://github.com/UnrealAkama/NightShade/raw/master/screenshots/listing_style_ctf.png)
 
+A blind style capture the flag.
+![Blind Style CTF](https://github.com/UnrealAkama/NightShade/raw/master/screenshots/blind_style_ctf.png)
+
+A user profile.
 ![User Profile](https://github.com/UnrealAkama/NightShade/raw/master/screenshots/user_profile.png)
 
+A list of all the contests.
 ![Contest Lists](https://github.com/UnrealAkama/NightShade/raw/master/screenshots/contest_lists.png)
 
 
