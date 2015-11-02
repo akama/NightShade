@@ -6,7 +6,7 @@
 
 {% block content %}
   <div class="challenge-list col-md-8">
-    <div class="challenge-title"
+    <div class="challenge-title">
       <h1> Challenges - {{ object.title }} </h1>
     </div>
 
@@ -41,7 +41,7 @@
     {% endfor %}
   </div>
   <div class="col-md-3 col-md-offset-1 score-list">
-    <div class="score-title"
+    <div class="score-title">
       <h1> Score List </h1>
     </div>
     {% for person, score, time in object.score_board %}

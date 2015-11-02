@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block extend_title %}
+| {{object.title}}
+{% endblock %}
+
+{% block content %}
+<div class="challenge-list col-md-8">
+        <div class="challenge-title">
+                <h1> Challenges - {{ object.title }}</h1>
+        </div>
+
+        <div class="challenge-subtitle">
+                {{ object.description  | linebreaks }}
+        </div>
+        <div class="line-spacer"></div>
+
+
+
+        <div class="challenge-submission">
+                {% if solved %}
+                        <form class="input-flag" action="" method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input class="input-flag-button" type="submit" value="Submit flag.">
+                        </form>
+                {% else %}
+                        <p> All the challenges have been solved. </p>
+                {% endif %}
+
+        </div>
+
+        {% if messages %} 
+        <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+</div>
+
+<div class="col-md-3 col-md-offset-1 score-list">
+        <div class="score-title">
+                <h1> Score List </h1>
+        </div>
+        {% for person, score, time in object.score_board %}
+        <div class="score-item">
+                <div class="score-name">
+                        <a href="{% url "profile" person %}">{{ person }}</a>
+                </div>
+                <div class="score-number">
+                        {{ score }}
+                </div>
+                <br>
+        </div>
+        {% empty %}
+        <div class="challenge-score-missing">
+                No one has scored yet.
+        </div>
+        {% endfor %}
+</div>
+{% endblock %}

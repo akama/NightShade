@@ -11,8 +11,7 @@ from django.contrib.auth.models import User
 
 from CTF.models import Contest, Challenge, Score
 
-from CTF.forms import ChallengeScoreForm
-
+from CTF.forms import ChallengeScoreForm, BlindContestScoreForm
 
 
 # Create your views here.
@@ -83,10 +82,7 @@ def ChallengeView(request, slug):
         if form.is_valid() and not challenge.solved(request.user):
             score = Score(challenge=challenge, user=request.user, contest=challenge.contest)
             score.save()
-            messages.add_message(request, messages.SUCCESS, 'Challenge Solved!')
             return HttpResponseRedirect(reverse('challenge-view', args=(slug,)))
-        else:
-            messages.add_message(request, messages.ERROR, 'Incorrect Flag!')
     else:
         form = ChallengeScoreForm()
 
@@ -101,6 +97,8 @@ def ContestView(request, slug):
     contest = Contest.objects.get(slug=slug)
     if contest.contest_type == Contest.JEOPARDY:
         return jeopardy_view(request, slug)
+    elif contest.contest_type == Contest.BLIND:
+        return blind_view(request, slug)
     else:
         return listing_view(request, slug)
 
@@ -137,3 +135,29 @@ def jeopardy_view(request, slug):
 
     return render(request, 'CTF/contest_detail_jeopardy.html',
                     {'catagories': catagories, 'object': contest})
+
+def blind_view(request, slug):
+    contest = Contest.objects.get(slug=slug)
+
+    challenges = contest.challenge_set.all()
+
+    if request.method == 'POST':
+        kwargs = {'challenges': challenges}
+        form = BlindContestScoreForm(request.POST, **kwargs)
+        if form.is_valid() and not form.sucessful_challenge().solved(request.user):
+            score = Score(challenge=form.sucessful_challenge(), user=request.user, contest=form.sucessful_challenge().contest)
+            score.save()
+            messages.add_message(request, messages.SUCCESS, 'Challenge Solved!')
+            return HttpResponseRedirect(reverse('contest-view', args=(slug,)))
+        if form.is_valid() and form.sucessful_challenge().solved(request.user):
+            messages.add_message(request, messages.SUCCESS, 'This challenge was already solved.')
+            return HttpResponseRedirect(reverse('contest-view', args=(slug,)))
+    else:
+        form = ChallengeScoreForm()
+
+    check = lambda x: not x.solved(request.user)
+    # stores if all the challenges have been solved
+    solved = any(check(x) for x in challenges)
+
+    return render(request, 'CTF/contest_detail_blind.html',
+            {'object': contest, 'form' : form, 'solved' : solved})

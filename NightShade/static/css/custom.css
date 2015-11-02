@@ -226,6 +226,15 @@ table {
     font-size: 16px;
 }
 
+.messages {
+    color: white;
+    padding-top: 20px;
+}
+
+.errorlist {
+    color: white;
+}
+
 *{font-family:Anonymous;}
 
 /*----------------------------------------------------------------------------------*/

@@ -33,10 +33,12 @@ admin.site.register(Score, ScoreAdmin)
 class Contest(models.Model):
     LISTING = "L"
     JEOPARDY = "J"
+    BLIND = "B"
 
     CONTEST_TYPES_CHOICES = (
         (LISTING, "Listing"),
         (JEOPARDY, "Jeopardy"),
+        (BLIND, "Blind"),
     )
 
     title = models.CharField(max_length=200, unique=True)
@@ -78,7 +80,7 @@ class Contest(models.Model):
 
 class ContestAdmin(admin.ModelAdmin):
     exclude = ('slug'),
-
+    list_display = ['title', 'contest_type', 'active']
 
 admin.site.register(Contest, ContestAdmin)
 
@@ -148,5 +150,6 @@ class ChallengeAdmin(admin.ModelAdmin):
     form = ChallengeAdminForm
     exclude = [('slug'), ]
     inlines = [ChallengeFileAdmin]
+    list_display = ['contest', 'title', 'category', 'points', 'active']
 
 admin.site.register(Challenge, ChallengeAdmin)
