@@ -24,8 +24,7 @@ class Score(models.Model):
 
 
 class ScoreAdmin(admin.ModelAdmin):
-    pass
-
+    readonly_fields = ('completed',)
 
 admin.site.register(Score, ScoreAdmin)
 
