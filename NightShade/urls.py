@@ -19,7 +19,7 @@ urlpatterns = patterns('',
   # CTF URL Patterns
   url(r'^contests/(?P<slug>[-_\w]+)/', ContestView, name='contest-view'),
   url(r'^challenge/(?P<slug>[-_\w]+)/', ChallengeView, name='challenge-view'),
-  url(r'^accounts/profile/(?P<username>[\.\-_\w]+)/', profile, name='profile'),
+  url(r'^accounts/profile/(?P<username>[\@\.\-_\w]+)/', profile, name='profile'),
   
   # Login patterns
   url(r'^accounts/login/$', login, name='login'),
