@@ -143,10 +143,12 @@ body {
 }
 
 .score-name {
-	display:inline;
+	display: inline-block;
 	color: white;
-	padding-bottom: 20px;
 	color: #51CCDD;
+    max-width: 210px;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
 }
 
 table { 

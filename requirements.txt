@@ -8,6 +8,7 @@ django-storages==1.1.8
 django-tenant-schemas==1.5.2
 django-toolbelt==0.0.1
 gunicorn==19.3.0
+newrelic==2.64.0.48
 psycopg2==2.6.1
 static==0.4
 static3==0.6.1
