@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -49,7 +49,11 @@ def register(request):
 
 
 def profile(request, username):
-    user = User.objects.get(username=username)
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist as e:
+        raise Http404("User does not exist.")
+
     user_score_set = user.score_set.all()
     contests = []
     results = {}
