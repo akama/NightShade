@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
+from django.contrib.auth import authenticate, login
+
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.shortcuts import redirect
@@ -40,6 +42,9 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],)
+            login(request, new_user)
             return HttpResponseRedirect(reverse('home'))
     else:
         form = UserCreationForm()
