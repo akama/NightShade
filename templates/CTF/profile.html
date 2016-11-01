@@ -28,6 +28,11 @@
                             </div>
                             <div class="challenge-following">
                                 ● {{ score.completed }}
+                                {% if score.challenge.points == 1 %}
+                                        ● {{ score.challenge.points }} point
+                                {% else %}
+                                        ● {{ score.challenge.points }} points
+                                {% endif %}
                             </div>
                         <br>
                     </div>
