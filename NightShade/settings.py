@@ -125,7 +125,7 @@ TEMPLATE_LOADERS = (
     )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
+    'django.template.context_processors.request',
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
 )
@@ -174,6 +174,11 @@ SHARED_APPS = (
 INSTALLED_APPS = list(set(SHARED_APPS + TENANT_APPS))
 
 TENANT_MODEL = "customers.Client" # app.Model
+
+if DEBUG:
+    SCHEMA_DEFAULT = "localhost"
+else:
+    SCHEMA_DEFAULT = "isusec"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
