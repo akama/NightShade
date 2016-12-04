@@ -125,7 +125,7 @@ TEMPLATE_LOADERS = (
     )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.template.context_processors.request',
+    'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
 )
@@ -156,12 +156,12 @@ TENANT_APPS = (
     # Uncomment the next line to enable the admin:
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'django.contrib.admin',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
     'CTF',
     'django.contrib.auth',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.sites',
+    'django.contrib.admin',
 )
 
 SHARED_APPS = (
