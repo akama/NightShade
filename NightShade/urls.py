@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib.auth.views import login, logout
-from CTF.views import register, profile, ChallengeView, ContestView, home_page
+from CTF.views import register, profile, ChallengeView, ContestView, home_page, health
 from django.views.generic.base import RedirectView
 
 
@@ -15,6 +15,7 @@ urlpatterns = [
   # url(r'^NightShade/', include('NightShade.foo.urls')),
   url(r'^$', home_page, name='home_page'),
   url(r'^time/$', home_page, name='home'),
+  url(r'^health/$', health, name='health'),
 
   # CTF URL Patterns
   url(r'^contests/(?P<slug>[-_\w]+)/', ContestView, name='contest-view'),

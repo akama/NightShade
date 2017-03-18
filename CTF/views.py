@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login
@@ -170,3 +170,6 @@ def blind_view(request, slug):
 
     return render(request, 'CTF/contest_detail_blind.html',
             {'object': contest, 'form' : form, 'solved' : solved})
+
+def health(request):
+    return HttpResponse(status=200)
