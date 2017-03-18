@@ -21,7 +21,7 @@ from CTF.forms import ChallengeScoreForm, BlindContestScoreForm
 @login_required
 def current_datetime(request):
     if request.user.is_authenticated():
-        return render(request, 'time.html', context_instance=RequestContext(request))
+        return render(request, 'time.html')
 
 
 def home_page(request):
@@ -34,7 +34,7 @@ def home_page(request):
     if len(contests) == 1:
         return redirect(reverse('contest-view', args=(contests[0].slug,)))
 
-    return render(request, 'home.html', {'contests': contests}, context_instance=RequestContext(request), )
+    return render(request, 'home.html', {'contests': contests}, )
 
 
 def register(request):

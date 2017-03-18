@@ -2,13 +2,13 @@ import os
 
 # Django settings for NightShade project.
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 if 'RDS_HOSTNAME' in os.environ:
     DEBUG = False
 else:
     DEBUG = True
-
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
 		# ('Your Name', 'your_email@example.com'),
@@ -117,21 +117,25 @@ if 'RDS_HOSTNAME' in os.environ:
 else:
     SECRET_KEY = '3$bp7g172awaq+9!3n7jp&ml35=r71q2#$mphjd+t(1t+23igx'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-        #     'django.template.loaders.eggs.Loader',
-    )
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
-    'django.contrib.auth.context_processors.auth',
-    'django.contrib.messages.context_processors.messages',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 MIDDLEWARE_CLASSES = (
-        'tenant_schemas.middleware.TenantMiddleware',
+        'NightShade.middleware.SettingTenantMiddleware',
+        # 'tenant_schemas.middleware.TenantMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
@@ -147,8 +151,6 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'NightShade.wsgi.application'
-
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\', '/'),)
 
 TENANT_APPS = (
     'django.contrib.contenttypes',
@@ -171,7 +173,7 @@ SHARED_APPS = (
     'storages',
 )
 
-INSTALLED_APPS = list(set(SHARED_APPS + TENANT_APPS))
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
 
 TENANT_MODEL = "customers.Client" # app.Model
 
