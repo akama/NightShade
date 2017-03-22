@@ -4,6 +4,7 @@ from operator import itemgetter
 import re
 
 from django.db import models
+from django.db.models import Sum, Max, Min
 from django.contrib.auth.models import User
 from django.contrib import admin
 from django.template.defaultfilters import slugify
@@ -50,19 +51,11 @@ class Contest(models.Model):
         return self.title
 
     def score_board(self):
-        results = self.score_set.all()
+        board = Score.objects.values('user__username').annotate(time=Min('completed'), total=Sum('challenge__points'))
+        board = list(board)
         sorted_results = []
-        found_match = False
-        for score in results:
-            for foo in sorted_results:
-                if score.user.username == foo[0]:
-                    foo[1] = foo[1] + score.get_points()
-                    if score.completed > foo[2]:
-                        foo[2] = score.completed
-                    found_match = True
-            if not found_match:
-                sorted_results.append([score.user.username, score.get_points(), score.completed])
-            found_match = False
+        for item in board:
+            sorted_results.append((item['user__username'], item['total'], item['time']))
 
         # sorting bitches
         sorted_results.sort(key=itemgetter(2))
