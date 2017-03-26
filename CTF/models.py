@@ -51,7 +51,7 @@ class Contest(models.Model):
         return self.title
 
     def score_board(self):
-        board = Score.objects.values('user__username').annotate(time=Max('completed'), total=Sum('challenge__points'))
+        board = Score.objects.filter(contest=self).values('user__username').annotate(time=Max('completed'), total=Sum('challenge__points'))
         board = list(board)
         sorted_results = []
         for item in board:
