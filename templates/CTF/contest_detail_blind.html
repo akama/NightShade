@@ -17,7 +17,7 @@
 
 
 
-        <div class="challenge-submission">
+        <div class="challenge-submission challenge-subtitle">
                 {% if solved %}
                         <form class="input-flag" action="" method="post">
                                 {% csrf_token %}
@@ -25,12 +25,12 @@
                                 <input class="input-flag-button" type="submit" value="Submit flag.">
                         </form>
                 {% else %}
-                        <p> All the challenges have been solved. </p>
+                <p> All the current challenges have been solved. </p>
                 {% endif %}
 
         </div>
 
-        {% if messages %} 
+        {% if messages %}
         <ul class="messages">
                 {% for message in messages %}
                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>

@@ -15,6 +15,7 @@ from CTF.models import Contest, Challenge, Score
 
 from CTF.forms import ChallengeScoreForm, BlindContestScoreForm
 
+import json
 
 # Create your views here.
 
@@ -176,4 +177,7 @@ def health(request):
 
 def ctftime_endpoint(request, slug):
     scores = []
-    return HttpResponse(status=200)
+    contest = Contest.objects.get(slug=slug)
+    for i, score in enumerate(contest.score_board()):
+        scores.append({"pos": i+1, "team": score[0], "score": score[1]})
+    return HttpResponse(json.dumps({"standings": scores}))
