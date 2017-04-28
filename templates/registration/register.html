@@ -5,6 +5,9 @@
 {% block content %}
     <div class="">
         <h4 class="login-title">Register</h4>
+        <div class="challenge-subtitle"> 
+                <p> Note: Username can only contain alphanumeric, _, @, . and - characters </p>
+        </div>
         <form class="input-flag" action="" role="form" method="post">
             {% csrf_token %}
             <div class="form-group">
