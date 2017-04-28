@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login
 
 from django.contrib.auth.decorators import login_required
@@ -83,9 +84,6 @@ def profile(request, username):
 def ChallengeView(request, slug):
     challenge = Challenge.objects.get(slug=slug)
 
-    if request.method == 'POST' and not request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('login'))
-
     if request.method == 'POST':
         kwargs = {'key': challenge.key, 'regex_key': challenge.regex_key}
         form = ChallengeScoreForm(request.POST, **kwargs)
@@ -104,7 +102,14 @@ def ChallengeView(request, slug):
 
 
 def ContestView(request, slug):
-    contest = Contest.objects.get(slug=slug)
+    try:
+        contest = Contest.objects.get(slug=slug)
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect(reverse('home_page'))
+
+    if request.method == 'POST' and not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
+
     if contest.contest_type == Contest.JEOPARDY:
         return jeopardy_view(request, slug)
     elif contest.contest_type == Contest.BLIND:
