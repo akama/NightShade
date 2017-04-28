@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib.auth.views import login, logout
-from CTF.views import register, profile, ChallengeView, ContestView, home_page, health
+from CTF.views import register, profile, ChallengeView, ContestView, home_page, health, ctftime_endpoint
 from django.views.generic.base import RedirectView
 
 
@@ -19,8 +19,10 @@ urlpatterns = [
 
   # CTF URL Patterns
   url(r'^contests/(?P<slug>[-_\w]+)/', ContestView, name='contest-view'),
+  url(r'^contests/(?P<slug>[-_\w]+).json', ctftime_endpoint, name='contest-view-json'),
   url(r'^challenge/(?P<slug>[-_\w]+)/', ChallengeView, name='challenge-view'),
   url(r'^accounts/profile/(?P<username>[\@\.\-_\w]+)/', profile, name='profile'),
+
 
   # Login patterns
   url(r'^accounts/login/$', login, name='login'),

@@ -11,6 +11,12 @@
         <div class="challenge-main-title">{{ object.title }}</div>
 
         <div class="challenge-subtitle">{{ object.points }} Points ● {{ object.category }}</div>
+        {% if object.author and object.author_link %}
+                <div class="challenge-subtitle">By: <a href="{{ object.author_link }}"> {{ object.author }}</a></div>
+        {% elif object.author and not object.author_link %}
+                <div class="challenge-subtitle">By: {{ object.author }}</div>
+        {% endif %}
+
         <hr class="menu-divider"> </hr>
 
         <div class="challenge-text">{{ object.description|linebreaks }}</div>

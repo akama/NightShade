@@ -91,6 +91,8 @@ class Challenge(models.Model):
     key = models.CharField(max_length=200, default=genRandomFlag)
     regex_key = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
+    author = models.CharField(max_length=200, blank=True, default="", null=True)
+    author_link = models.CharField(max_length=200, blank=True, default="", null=True)
 
     def __str__(self):
         return self.title
@@ -142,6 +144,6 @@ class ChallengeAdmin(admin.ModelAdmin):
     form = ChallengeAdminForm
     exclude = [('slug'), ]
     inlines = [ChallengeFileAdmin]
-    list_display = ['contest', 'title', 'category', 'points', 'active']
+    list_display = ['title', 'category', 'points', 'active', 'contest']
 
 admin.site.register(Challenge, ChallengeAdmin)

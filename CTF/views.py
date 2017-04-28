@@ -173,3 +173,7 @@ def blind_view(request, slug):
 
 def health(request):
     return HttpResponse(status=200)
+
+def ctftime_endpoint(request, slug):
+    scores = []
+    return HttpResponse(status=200)
