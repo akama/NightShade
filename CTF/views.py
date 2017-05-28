@@ -84,10 +84,13 @@ def profile(request, username):
 def ChallengeView(request, slug):
     challenge = Challenge.objects.get(slug=slug)
 
+    if request.method == 'POST' and not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
+
     if request.method == 'POST':
         kwargs = {'key': challenge.key, 'regex_key': challenge.regex_key}
         form = ChallengeScoreForm(request.POST, **kwargs)
-        if form.is_valid() and not challenge.solved(request.user):
+        if form.is_valid() and not challenge.solved(request.user) and challenge.contest.active and challenge.active:
             score = Score(challenge=challenge, user=request.user, contest=challenge.contest)
             score.save()
             return HttpResponseRedirect(reverse('challenge-view', args=(slug,)))
@@ -107,8 +110,8 @@ def ContestView(request, slug):
     except ObjectDoesNotExist:
         return HttpResponseRedirect(reverse('home_page'))
 
-    if request.method == 'POST' and not request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('login'))
+
+
 
     if contest.contest_type == Contest.JEOPARDY:
         return jeopardy_view(request, slug)
@@ -155,6 +158,9 @@ def blind_view(request, slug):
     contest = Contest.objects.get(slug=slug)
 
     challenges = contest.challenge_set.all()
+
+    if request.method == 'POST' and not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
 
     if request.method == 'POST':
         kwargs = {'challenges': challenges}
