@@ -32,6 +32,8 @@ If you want someone to host your platform, contact me. If you are a non-profit o
 INSTALLING
 ----------
 
+NightShade uses python 2, so use `pip2` and `python2` if your default python is python 3 (ex: ArchLinux).
+
 Install all the requirements in the requirements.txt
 
     pip install -r requirements.txt
